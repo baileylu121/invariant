@@ -3,19 +3,25 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    systems.url = "github:nix-systems/default";
+
+    import-tree.url = "github:vic/import-tree";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, disko, impermanence, ... }: {
-    nixosConfigurations.invariant = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        disko.nixosModules.default
-        impermanence.nixosModules.default
-        ./configuration.nix
-      ];
-    };
-  };
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      inputs.import-tree [
+        ./modules
+        ./machines
+        ./dev
+      ]
+    );
 }

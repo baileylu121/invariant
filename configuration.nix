@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./impermenance.nix
-      ./disko.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./impermenance.nix
+    ./disko.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -25,18 +25,21 @@
   };
 
   programs = {
-	niri.enable = true;
+    niri.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-	ghostty
-	librewolf
-	neovim
-	git
+    ghostty
+    librewolf
+    neovim
+    git
   ];
 
   nix = {
-	settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   services.xserver.xkb.layout = "gb";
@@ -61,4 +64,3 @@
 
   system.stateVersion = "25.11";
 }
-
