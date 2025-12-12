@@ -54,6 +54,7 @@
     packages = with pkgs; [
       tree
     ];
+    initialPassword = "4835";
   };
 
   services.openssh.enable = true;
