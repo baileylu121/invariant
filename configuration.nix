@@ -4,6 +4,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./impermenance.nix
+      ./disko.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
