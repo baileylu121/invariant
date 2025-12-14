@@ -11,6 +11,7 @@ in
     imports = [
       self.modules.homeManager.neovim
       self.modules.homeManager.bash
+      self.modules.homeManager.comma
     ];
 
     programs.git = {

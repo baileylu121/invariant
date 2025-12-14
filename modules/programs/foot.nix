@@ -58,7 +58,7 @@
           Type = "simple";
           ExecStart = "${lib.getExe foot} --server";
         };
-        environment = lib.mkForce {};
+        environment = lib.mkForce { };
       };
     };
 }

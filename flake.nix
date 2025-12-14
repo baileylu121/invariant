@@ -19,6 +19,8 @@
     nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     home-manager.url = "github:nix-community/home-manager";
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
   };
 
   nixConfig = {

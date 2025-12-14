@@ -15,6 +15,7 @@ let
       eza
 
       direnv
+      nh
 
       starship
     ];
