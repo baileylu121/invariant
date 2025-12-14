@@ -6,8 +6,8 @@ in
   flake.nixosConfigurations.proart-p16-h7606wp = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      self.modules.nixos.btrfs.filesystem
-      self.modules.nixos.btrfs.impermenance
+      self.modules.nixos.btrfsFilesystem
+      self.modules.nixos.btrfsImpermanence
 
       self.modules.nixos.audio
       self.modules.nixos.boot
@@ -15,7 +15,7 @@ in
       self.modules.nixos.networking
       self.modules.nixos.nix-settings
 
-      self.modules.nixos.users.luke
+      self.modules.nixos.usersLuke
 
       (
         {

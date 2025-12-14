@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.btrfs.filesystem = {
+  flake.modules.nixos.btrfsFilesystem = {
     imports = [
       inputs.disko.nixosModules.default
     ];

@@ -1,8 +1,8 @@
 { inputs, lib, ... }:
 {
-  flake.modules.nixos.btrfs.impermenance = {
+  flake.modules.nixos.btrfsImpermanence = {
     imports = [
-      inputs.impermenance.nixosModules.default
+      inputs.impermanence.nixosModules.default
     ];
 
     environment.persistence."/persist" = {

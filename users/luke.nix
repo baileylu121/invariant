@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.users.luke =
+  flake.modules.nixos.usersLuke =
     { pkgs, ... }:
     {
       users.users.luke = {
