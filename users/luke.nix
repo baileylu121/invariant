@@ -10,6 +10,7 @@ in
   flake.modules.homeManager.luke = {
     imports = [
       self.modules.homeManager.neovim
+      self.modules.homeManager.bash
     ];
 
     programs.git = {
@@ -32,6 +33,7 @@ in
     {
       imports = [
         inputs.home-manager.nixosModules.default
+        self.modules.nixos.bash
       ];
 
       users.users.luke = {
