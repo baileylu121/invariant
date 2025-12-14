@@ -1,5 +1,32 @@
 { inputs, self, ... }:
+let
+  inherit (inputs) home-manager nixpkgs;
+in
 {
+  imports = [
+    home-manager.flakeModules.home-manager
+  ];
+
+  flake.modules.homeManager.luke = {
+    imports = [
+      self.modules.homeManager.neovim
+    ];
+
+    programs.git = {
+      enable = true;
+      settings.user = {
+        email = "baileylu@tcd.ie";
+        name = "Luke Bailey";
+      };
+    };
+
+    home = {
+      username = "luke";
+      stateVersion = "25.11";
+      homeDirectory = "/home/luke";
+    };
+  };
+
   flake.modules.nixos.users-luke =
     { pkgs, ... }:
     {
@@ -13,21 +40,7 @@
         initialPassword = "4835";
       };
 
-      home-manager.users.luke = {
-        imports = [
-          self.modules.homeManager.neovim
-        ];
-
-        programs.git = {
-          enable = true;
-          settings.user = {
-            email = "baileylu@tcd.ie";
-            name = "Luke Bailey";
-          };
-        };
-
-        home.stateVersion = "25.11";
-      };
+      home-manager.users.luke = self.modules.homeManager.luke;
 
       programs.niri.enable = true;
 
@@ -36,4 +49,9 @@
         librewolf
       ];
     };
+
+  flake.homeConfigurations.luke = home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    modules = [ self.modules.homeManager.luke ];
+  };
 }
