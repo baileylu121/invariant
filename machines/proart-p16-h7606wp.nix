@@ -14,6 +14,7 @@ in
       self.modules.nixos.locale
       self.modules.nixos.networking
       self.modules.nixos.nix-settings
+      self.modules.nixos.battery
 
       self.modules.nixos.users-luke
 
