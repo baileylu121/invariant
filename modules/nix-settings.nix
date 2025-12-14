@@ -5,6 +5,8 @@
       inputs.determinate.nixosModules.default
     ];
 
+    nixpkgs.config.allowUnfree = true;
+
     nix.settings = {
       trusted-users = [ "@wheel" ];
       experimental-features = [
@@ -14,6 +16,5 @@
     };
 
     system.stateVersion = "25.11";
-
   };
 }

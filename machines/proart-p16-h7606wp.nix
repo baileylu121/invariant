@@ -15,6 +15,7 @@ in
       self.modules.nixos.networking
       self.modules.nixos.nix-settings
       self.modules.nixos.battery
+      self.modules.nixos.nvidia
 
       self.modules.nixos.users-luke
 
