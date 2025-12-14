@@ -50,5 +50,7 @@
       btrfs subvolume create /btrfs_tmp/root
       umount /btrfs_tmp
     '';
+
+    security.sudo.extraConfig = "Defaults lecture = never";
   };
 }
