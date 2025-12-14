@@ -20,8 +20,10 @@
 
         programs.git = {
           enable = true;
-          userEmail = "baileylu@tcd.ie";
-          userName = "Luke Bailey";
+          settings.user = {
+            email = "baileylu@tcd.ie";
+            name = "Luke Bailey";
+          };
         };
 
         home.stateVersion = "25.11";
