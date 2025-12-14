@@ -10,7 +10,7 @@ in
       self.modules.nixos.btrfs-impermanence
 
       self.modules.nixos.audio
-      self.modules.nixos.boot
+      self.modules.nixos.zenv4-kernel
       self.modules.nixos.locale
       self.modules.nixos.networking
       self.modules.nixos.nix-settings

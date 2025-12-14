@@ -15,11 +15,13 @@
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
+    nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel";
   };
 
   nixConfig = {
-    extra-subsituters = [ "https://install.determinate.systems" ];
-    extra-trusted-public-keys = [ "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM=" ];
+    extra-subsituters = [ "https://cache.garnix.io" ];
+    extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
 
   outputs =
