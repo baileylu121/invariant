@@ -13,15 +13,18 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       inputs.import-tree [
-        ./modules
-        ./machines
         ./dev
+        ./machines
+        ./modules
+        ./users
       ]
     );
 }

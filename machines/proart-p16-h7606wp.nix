@@ -8,6 +8,15 @@ in
     modules = [
       self.modules.nixos.btrfs.filesystem
       self.modules.nixos.btrfs.impermenance
+
+      self.modules.nixos.audio
+      self.modules.nixos.boot
+      self.modules.nixos.locale
+      self.modules.nixos.networking
+      self.modules.nixos.nix-settings
+
+      self.modules.nixos.users.luke
+
       (
         {
           config,
