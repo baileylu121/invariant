@@ -1,7 +1,24 @@
 {
   self,
+  lib,
   ...
 }:
+let
+  runtimeInputs =
+    pkgs: with pkgs; [
+      blesh
+
+      atuin
+      zoxide
+
+      bat
+      eza
+
+      direnv
+
+      starship
+    ];
+in
 {
   config = {
     perSystem =
@@ -11,27 +28,22 @@
           bleshPath = "${pkgs.blesh}/share/blesh/ble.sh";
         };
       in
-      {
+      rec {
         packages.bash = pkgs.writeShellApplication {
           name = "bash";
 
-          runtimeInputs = with pkgs; [
-            bash
-            blesh
-
-            atuin
-            zoxide
-
-            bat
-            eza
-
-            direnv
-          ];
+          runtimeInputs = [
+            pkgs.bash
+          ]
+          ++ runtimeInputs pkgs;
 
           text = ''
-            exec bash "$@" \
-              --rcfile ${bashrc}
+            exec bash \
+              --rcfile ${bashrc} \
+              "$@"
           '';
+
+          passthru.shellPath = "/bin/bash";
         };
       };
 
@@ -39,11 +51,11 @@
       { pkgs, ... }:
       let
         inherit (pkgs.stdenv.hostPlatform) system;
+        inherit (self.packages.${system}) bash;
       in
       {
-        home.packages = [
-          self.packages.${system}.bash
-        ];
+        home.sessionVariables.SHELL = lib.getExe bash;
+        home.packages = [ bash ] ++ runtimeInputs pkgs;
       };
 
     flake.modules.nixos.bash =
@@ -53,8 +65,9 @@
         inherit (self.packages.${system}) bash;
       in
       {
+        environment.variables.SHELL = lib.getExe bash;
         users.defaultUserShell = bash;
-        environment.systemPackages = [ bash ];
+        environment.systemPackages = [ bash ] ++ runtimeInputs pkgs;
       };
   };
 }
