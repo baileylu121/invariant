@@ -119,11 +119,21 @@ in
       { pkgs, ... }:
       let
         inherit (pkgs.stdenv.hostPlatform) system;
+        inherit (self.packages.${system}) neovim;
       in
       {
-        home.packages = [
-          self.packages.${system}.neovim
-        ];
+        home.sessionVariables.EDITOR = lib.getExe neovim;
+        home.packages = [ neovim ];
+      };
+
+    flake.modules.nixos.neovim =
+      { system, ... }:
+      let
+        inherit (self.packages.${system}) neovim;
+      in
+      {
+        environment.variables.EDITOR = lib.getExe neovim;
+        environment.systemPackages = [ neovim ];
       };
   };
 }
