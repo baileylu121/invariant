@@ -10,6 +10,8 @@
       deadnix.enable = true;
       mdformat.enable = true;
       nixfmt.enable = true;
+
+      stylua.enable = true;
     };
   };
 }

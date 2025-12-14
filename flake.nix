@@ -17,6 +17,8 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+
+    home-manager.url = "github:nix-community/home-manager";
   };
 
   nixConfig = {
