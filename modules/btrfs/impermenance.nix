@@ -1,6 +1,6 @@
 { inputs, lib, ... }:
 {
-  flake.modules.nixos.btrfsImpermanence = {
+  flake.modules.nixos.btrfs-impermanence = {
     imports = [
       inputs.impermanence.nixosModules.default
     ];

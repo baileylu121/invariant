@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.usersLuke =
+  flake.modules.nixos.users-luke =
     { pkgs, ... }:
     {
       users.users.luke = {
@@ -19,5 +19,6 @@
         neovim
         git
       ];
+
     };
 }
