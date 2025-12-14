@@ -97,6 +97,7 @@ in
             runtimeInputs = with pkgs; [
               neovim-unwrapped
 
+              git
               ripgrep
               fd
               nodejs
