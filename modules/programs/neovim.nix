@@ -128,8 +128,9 @@ in
       };
 
     flake.modules.nixos.neovim =
-      { system, ... }:
+      { pkgs, ... }:
       let
+        inherit (pkgs.stdenv.hostPlatform) system;
         inherit (self.packages.${system}) neovim;
       in
       {

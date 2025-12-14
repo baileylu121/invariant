@@ -5,13 +5,15 @@
 }:
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, self', ... }:
     {
       packages.niri = pkgs.writeShellApplication {
         name = "niri";
 
         runtimeInputs = with pkgs; [
           niri
+          self'.packages.neovim
+          self'.packages.foot
         ];
 
         text = ''
@@ -32,6 +34,7 @@
     {
       imports = [
         self.modules.nixos.foot
+        self.modules.nixos.neovim
       ];
 
       programs.uwsm = {
