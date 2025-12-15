@@ -12,7 +12,7 @@ let
     with pkgs;
     [
       blesh
-      zellij
+      self.packages.${system}.zellij
 
       atuin
       zoxide
