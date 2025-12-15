@@ -17,6 +17,7 @@
           text = ''
             exec zellij \
               --config ${./zellij/config.kdl} \
+              --layout ${./zellij/layout.kdl} \
               "$@"
           '';
         };
