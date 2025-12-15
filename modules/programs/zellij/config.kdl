@@ -10,4 +10,15 @@ keybinds {
         bind "Alt 8" { GoToTab 8; SwitchToMode "Normal"; }
         bind "Alt 9" { GoToTab 9; SwitchToMode "Normal"; }
     }
+    shared_except "locked" {
+        bind "Alt z" {
+            LaunchOrFocusPlugin "file:@zsmPath@" {
+                floating true
+                move_to_focused_tab true
+                default_layout "@layoutPath@"
+            }
+        }
+    }
 }
+
+show_startup_tips false

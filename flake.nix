@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-rust-wasi.url = "github:diogotcorreia/nixpkgs?ref=rustc-wasi";
     systems.url = "github:nix-systems/default";
 
     import-tree.url = "github:vic/import-tree";
