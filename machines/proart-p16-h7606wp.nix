@@ -10,12 +10,16 @@ in
       self.modules.nixos.btrfs-impermanence
 
       self.modules.nixos.audio
-      self.modules.nixos.zenv4-kernel
-      self.modules.nixos.locale
       self.modules.nixos.networking
-      self.modules.nixos.nix-settings
+
       self.modules.nixos.battery
+
+      self.modules.nixos.display-manager
+      self.modules.nixos.locale
+      self.modules.nixos.nix-settings
+
       self.modules.nixos.nvidia
+      self.modules.nixos.zenv4-kernel
 
       self.modules.nixos.users-luke
 
