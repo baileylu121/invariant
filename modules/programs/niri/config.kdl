@@ -310,7 +310,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T { spawn "footclient" "zellij"; }
     Mod+B { spawn "librewolf"; }
-    Mod+N { spawn "footclient" "zellij" "options" "--default-shell" "nvim"; }
+    Mod+N { spawn "footclient" "nvim"; }
     Mod+A { spawn "sysmenu"; }
     Mod+Alt+L { spawn "hyprlock"; }
 
