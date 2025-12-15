@@ -76,7 +76,12 @@ in
 
   config = {
     perSystem =
-      { pkgs, config, ... }:
+      {
+        pkgs,
+        config,
+        self',
+        ...
+      }:
       let
         cfg = config.invariant.neovim;
       in
@@ -102,7 +107,7 @@ in
               fd
               nodejs
               zoxide
-              direnv
+              self'.packages.direnv
               tree-sitter
               lazygit
             ];

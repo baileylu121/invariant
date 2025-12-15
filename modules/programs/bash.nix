@@ -5,7 +5,12 @@
 }:
 let
   runtimeInputs =
-    pkgs: with pkgs; [
+    pkgs:
+    let
+      inherit (pkgs.stdenv.hostPlatform) system;
+    in
+    with pkgs;
+    [
       blesh
       zellij
 
@@ -15,7 +20,7 @@ let
       bat
       eza
 
-      direnv
+      self.packages.${system}.direnv
       nh
 
       starship
