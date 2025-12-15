@@ -7,6 +7,7 @@ let
   runtimeInputs =
     pkgs: with pkgs; [
       blesh
+      zellij
 
       atuin
       zoxide
