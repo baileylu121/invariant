@@ -17,4 +17,8 @@
 
     system.stateVersion = "25.11";
   };
+
+  flake.modules.homeManager.nix-settings = {
+    nixpkgs.config.allowUnfree = true;
+  };
 }

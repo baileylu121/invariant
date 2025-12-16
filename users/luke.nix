@@ -9,9 +9,10 @@ in
 
   flake.modules.homeManager.luke = {
     imports = [
-      self.modules.homeManager.neovim
       self.modules.homeManager.bash
       self.modules.homeManager.comma
+      self.modules.homeManager.neovim
+      self.modules.homeManager.nix-settings
     ];
 
     programs.git = {
