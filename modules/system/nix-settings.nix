@@ -13,6 +13,8 @@
         "nix-command"
         "flakes"
       ];
+      http-connections = 128;
+      max-substitution-jobs = 128;
     };
 
     system.stateVersion = "25.11";
