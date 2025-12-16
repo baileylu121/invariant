@@ -16,6 +16,7 @@ keybinds {
                 floating true
                 move_to_focused_tab true
                 default_layout "@layoutPath@"
+                show_resurrectable_sessions true
             }
         }
     }
