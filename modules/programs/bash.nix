@@ -20,6 +20,12 @@ let
       bat
       eza
 
+      git
+      lazygit
+      gh
+      glab
+      graphite-cli
+
       self.packages.${system}.direnv
       nh
 
