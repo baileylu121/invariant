@@ -22,6 +22,8 @@
     home-manager.url = "github:nix-community/home-manager";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
+
+    stylix.url = "github:nix-community/stylix";
   };
 
   nixConfig = {
