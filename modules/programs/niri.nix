@@ -37,6 +37,10 @@
         self.modules.nixos.neovim
       ];
 
+      environment.systemPackages = [
+        pkgs.wl-clipboard-rs
+      ];
+
       programs.uwsm = {
         enable = true;
         waylandCompositors = {
