@@ -21,5 +21,7 @@
         };
       };
     };
+
+    services.tailscale.enable = true;
   };
 }
