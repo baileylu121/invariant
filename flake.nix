@@ -39,6 +39,7 @@
         ./machines
         ./modules
         ./users
+        ./assets
       ]
     );
 }
