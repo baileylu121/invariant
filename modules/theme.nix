@@ -45,7 +45,7 @@ in
           };
 
           monospace = {
-            package = pkgs.geist-font;
+            package = pkgs.nerd-fonts.geist-mono;
             name = "Geist Mono";
           };
 
