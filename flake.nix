@@ -44,7 +44,6 @@
         ./machines
         ./modules
         ./users
-        ./assets
       ]
     );
 }
