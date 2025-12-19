@@ -4,30 +4,35 @@
   ...
 }:
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.niri = pkgs.writeShellApplication {
+  flake.modules.nixos.niri =
+    { pkgs, config, ... }:
+    let
+      niriConfig = pkgs.replaceVars ./niri/config.kdl {
+        inherit (config.lib.stylix.colors.withHashtag)
+          base00
+          base03
+          base08
+          base0A
+          base0D
+          ;
+
+        DEFAULT_AUDIO_SINK = "null";
+        DEFAULT_AUDIO_SOURCE = "null";
+      };
+      niri = pkgs.writeShellApplication {
         name = "niri";
 
-        runtimeInputs = with pkgs; [
-          niri
+        runtimeInputs = [
+          pkgs.niri
         ];
 
         text = ''
           exec niri \
-            --config '${./niri/config.kdl}' \
+            --config '${niriConfig}' \
             --session \
             "$@"
         '';
       };
-    };
-
-  flake.modules.nixos.niri =
-    { pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (self.packages.${system}) niri;
     in
     {
       imports = [
