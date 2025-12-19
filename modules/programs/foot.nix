@@ -4,50 +4,16 @@
   ...
 }:
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.foot = pkgs.writeShellApplication {
-        name = "foot";
-
-        runtimeInputs = with pkgs; [
-          foot
-        ];
-
-        text = ''
-          exec foot \
-            "$@"
-        '';
-      };
-      packages.footclient = pkgs.writeShellApplication {
-        name = "footclient";
-
-        runtimeInputs = with pkgs; [
-          foot
-        ];
-
-        text = ''
-          exec footclient \
-            "$@"
-        '';
-      };
-    };
-
   flake.modules.nixos.foot =
     { pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (self.packages.${system}) foot footclient;
-    in
     {
       imports = [
         self.modules.nixos.bash
       ];
 
-      environment.systemPackages = [
-        foot
-        footclient
-      ];
+      home-manager.sharedModules = [{
+        programs.foot.enable = true;
+      }];
 
       systemd.user.services.foot = {
         enable = true;
@@ -56,7 +22,7 @@
         description = "Foot Server";
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${lib.getExe foot} --server";
+          ExecStart = "${lib.getExe pkgs.foot} --server";
         };
         environment = lib.mkForce { };
       };
