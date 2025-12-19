@@ -11,9 +11,11 @@
         self.modules.nixos.bash
       ];
 
-      home-manager.sharedModules = [{
-        programs.foot.enable = true;
-      }];
+      home-manager.sharedModules = [
+        {
+          programs.foot.enable = true;
+        }
+      ];
 
       systemd.user.services.foot = {
         enable = true;

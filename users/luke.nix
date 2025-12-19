@@ -35,9 +35,11 @@ in
     {
       imports = [
         inputs.home-manager.nixosModules.default
+
         self.modules.nixos.bash
         self.modules.nixos.niri
         self.modules.nixos.theme
+        self.modules.nixos.zellij
       ];
 
       users.users.luke = {

@@ -11,9 +11,7 @@
         zsmPath = "${self'.packages.zoxide-session-manager}/bin/zsm.wasm";
         layoutPath = layout;
       };
-    in
-    {
-      packages.zellij = pkgs.writeShellApplication {
+      wrapped = pkgs.writeShellApplication {
         name = "zellij";
 
         runtimeInputs = [
@@ -27,16 +25,11 @@
             "$@"
         '';
       };
-    };
-
-  flake.modules.homeManager.zellij =
-    { pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (self.packages.${system}) zellij;
     in
     {
-      home.packages = [ zellij ];
+      packages.zellij = wrapped.overrideAttrs {
+        inherit (pkgs.zellij) version;
+      };
     };
 
   flake.modules.nixos.zellij =
@@ -46,6 +39,15 @@
       inherit (self.packages.${system}) zellij;
     in
     {
+      home-manager.sharedModules = [
+        {
+          programs.zellij = {
+            enable = true;
+            package = zellij;
+          };
+        }
+      ];
+
       environment.systemPackages = [ zellij ];
     };
 }

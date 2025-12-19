@@ -5,15 +5,13 @@
 }:
 {
   perSystem =
-    { pkgs, self', ... }:
+    { pkgs, ... }:
     {
       packages.niri = pkgs.writeShellApplication {
         name = "niri";
 
         runtimeInputs = with pkgs; [
           niri
-          self'.packages.neovim
-          self'.packages.foot
         ];
 
         text = ''
