@@ -31,6 +31,9 @@ in
           base0F = "c0b8bc";
         };
 
+        targets.qt.enable = true;
+
+        polarity = "dark";
         opacity.terminal = 0.8;
 
         fonts = {

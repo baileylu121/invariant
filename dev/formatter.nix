@@ -12,6 +12,8 @@
       nixfmt.enable = true;
 
       stylua.enable = true;
+
+      qmlformat.enable = true;
     };
   };
 }

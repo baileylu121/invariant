@@ -24,6 +24,11 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
 
     stylix.url = "github:nix-community/stylix";
+
+    qml-niri = {
+      url = "github:imiric/qml-niri/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
