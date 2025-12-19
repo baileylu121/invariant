@@ -37,7 +37,7 @@ in
         inputs.home-manager.nixosModules.default
         self.modules.nixos.bash
         self.modules.nixos.niri
-        self.modules.nixos.color-scheme
+        self.modules.nixos.theme
       ];
 
       users.users.luke = {

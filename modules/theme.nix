@@ -3,7 +3,7 @@ let
   inherit (inputs) stylix;
 in
 {
-  flake.modules.nixos.color-scheme =
+  flake.modules.nixos.theme =
     { pkgs, ... }:
     {
       imports = [
@@ -31,6 +31,8 @@ in
           base0F = "c0b8bc";
         };
 
+        opacity.terminal = 0.8;
+
         fonts = {
           serif = {
             package = pkgs.geist-font;
@@ -44,7 +46,7 @@ in
 
           monospace = {
             package = pkgs.geist-font;
-            name = "Geist Sans Mono";
+            name = "Geist Mono";
           };
 
           emoji = {
