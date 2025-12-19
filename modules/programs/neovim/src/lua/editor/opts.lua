@@ -64,3 +64,6 @@ vim.opt.shiftwidth = indent_spaces
 
 -- Use multiple spaces over <Tab>
 vim.opt.expandtab = true
+
+-- Use colors from the terminal
+vim.opt.termguicolors = false
