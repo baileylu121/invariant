@@ -51,7 +51,22 @@
 
       environment.systemPackages = [
         pkgs.wl-clipboard-rs
+        pkgs.xdg-desktop-portal-gnome
       ];
+
+      home-manager.sharedModules = [
+        {
+          home.packages = [
+            pkgs.xdg-desktop-portal-gnome
+          ];
+        }
+      ];
+
+      xdg.portal = {
+        enable = true;
+        configPackages = [ niri pkgs.niri ];
+        extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+      };
 
       programs.uwsm = {
         enable = true;
