@@ -5,7 +5,12 @@
 }:
 {
   flake.modules.nixos.niri =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      self',
+      ...
+    }:
     let
       niriConfig = pkgs.replaceVars ./niri/config.kdl {
         inherit (config.lib.stylix.colors.withHashtag)
@@ -24,6 +29,8 @@
 
         runtimeInputs = [
           pkgs.niri
+          pkgs.wl-clipboard-rs
+          self'.packages.dank-material-shell
         ];
 
         text = ''
@@ -38,10 +45,7 @@
       imports = [
         self.modules.nixos.foot
         self.modules.nixos.neovim
-      ];
-
-      environment.systemPackages = [
-        pkgs.wl-clipboard-rs
+        self.modules.nixos.dank-material-shell
       ];
 
       programs.uwsm = {

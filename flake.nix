@@ -25,8 +25,8 @@
 
     stylix.url = "github:nix-community/stylix";
 
-    qml-niri = {
-      url = "github:imiric/qml-niri/main";
+    dank-material-shell = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
