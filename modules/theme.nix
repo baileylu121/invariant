@@ -41,7 +41,7 @@ in
         fonts = {
           serif = {
             package = pkgs.geist-font;
-            name = "Geist Serif";
+            name = "Geist";
           };
 
           sansSerif = {
