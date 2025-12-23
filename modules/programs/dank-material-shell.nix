@@ -4,13 +4,13 @@
 }:
 let
   mkDmsConfig =
-    { dms-shell, pkgs }:
+    { dms-shell, pkgs, wallpaper ? ./dank-material-shell/sunset-mountains.jpg }:
     let
       cacheJson = pkgs.replaceVars ./dank-material-shell/cache.json {
-        wallpaperPath = ./dank-material-shell/sunset-mountains.jpg;
+        wallpaperPath = wallpaper;
       };
       sessionJson = pkgs.replaceVars ./dank-material-shell/session.json {
-        wallpaperPath = ./dank-material-shell/sunset-mountains.jpg;
+        wallpaperPath = wallpaper;
       };
     in
 
@@ -61,7 +61,7 @@ in
       dms = mkDmsConfig {
         inherit (inputs.dank-material-shell.packages.${system}) dms-shell;
         inherit pkgs;
-        wallpaper = config.lib.stylix.image;
+        wallpaper = config.stylix.image;
       };
     in
     {

@@ -8,10 +8,11 @@
     {
       pkgs,
       config,
-      self',
       ...
     }:
     let
+      inherit (pkgs.stdenv.hostPlatform) system;
+
       niriConfig = pkgs.replaceVars ./niri/config.kdl {
         inherit (config.lib.stylix.colors.withHashtag)
           base00
@@ -30,7 +31,7 @@
         runtimeInputs = [
           pkgs.niri
           pkgs.wl-clipboard-rs
-          self'.packages.dank-material-shell
+          self.packages.${system}.dank-material-shell
         ];
 
         text = ''
@@ -46,6 +47,10 @@
         self.modules.nixos.foot
         self.modules.nixos.neovim
         self.modules.nixos.dank-material-shell
+      ];
+
+      environment.systemPackages = [
+        pkgs.wl-clipboard-rs
       ];
 
       programs.uwsm = {
