@@ -121,7 +121,7 @@
     "niriOverviewOverlayEnabled": true,
     "weatherLocation": "New York, NY",
     "weatherCoordinates": "40.7128,-74.0060",
-    "useAutoLocation": false,
+    "useAutoLocation": true,
     "weatherEnabled": true,
     "networkPreference": "wifi",
     "vpnLastConnected": "",
