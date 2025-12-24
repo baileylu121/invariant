@@ -64,7 +64,10 @@
 
       xdg.portal = {
         enable = true;
-        configPackages = [ niri pkgs.niri ];
+        configPackages = [
+          niri
+          pkgs.niri
+        ];
         extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
       };
 
