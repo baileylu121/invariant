@@ -38,7 +38,7 @@ in
 
         self.modules.nixos.bash
         self.modules.nixos.niri
-        self.modules.nixos.theme
+        self.modules.nixos.theme-compline
         self.modules.nixos.zellij
       ];
 

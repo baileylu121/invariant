@@ -3,7 +3,7 @@ let
   inherit (inputs) stylix;
 in
 {
-  flake.modules.nixos.theme =
+  flake.modules.nixos.theme-compline =
     { pkgs, ... }:
     {
       imports = [
