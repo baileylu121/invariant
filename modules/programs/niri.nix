@@ -11,7 +11,6 @@
       ...
     }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
 
       niriConfig = pkgs.replaceVars ./niri/config.kdl {
         inherit (config.lib.stylix.colors.withHashtag)
@@ -31,7 +30,6 @@
         runtimeInputs = [
           pkgs.niri
           pkgs.wl-clipboard-rs
-          self.packages.${system}.dank-material-shell
         ];
 
         text = ''

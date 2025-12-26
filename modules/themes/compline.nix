@@ -31,7 +31,7 @@ in
           base0F = "c0b8bc";
         };
 
-        image = pkgs.copyPathToStore ./programs/dank-material-shell/sunset-mountains.jpg;
+        image = pkgs.copyPathToStore ./compline/sunset-mountains.jpg;
 
         targets.qt.enable = true;
 
