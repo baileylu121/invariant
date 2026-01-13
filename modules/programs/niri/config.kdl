@@ -15,7 +15,9 @@ input {
 }
 
 debug {
-    render-drm-device "/dev/dri/renderD128" // AMD iGPU (0x1002); NVIDIA dGPU is /dev/dri/renderD129 (0x10de)
+    // /dev/dri/renderD128 = AMD iGPU (0x1002)
+    // /dev/dri/renderD129 = NVIDIA dGPU (0x10de)
+    render-drm-device "/dev/dri/renderD129"
 }
 
 layout {
