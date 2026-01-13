@@ -19,12 +19,17 @@
 
       systemd.user.services.foot = {
         enable = true;
-        after = [ "graphical-session.target" ];
+        after = [
+          "graphical-session.target"
+          "niri.service"
+        ];
         wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
         description = "Foot Server";
         serviceConfig = {
           Type = "simple";
           ExecStart = "${lib.getExe pkgs.foot} --server";
+          TimeoutStopSec = "10s";
         };
         environment = lib.mkForce { };
       };
