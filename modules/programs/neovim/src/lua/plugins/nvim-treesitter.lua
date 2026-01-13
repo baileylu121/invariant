@@ -8,7 +8,7 @@ return {
     -- Look for parsers in this path
     vim.opt.rtp:append(treesitter_parser_dir)
 
-    require('nvim-treesitter.configs').setup {
+    require('nvim-treesitter').setup {
       ensure_installed = {},
       ignore_install = {},
       sync_install = false,
