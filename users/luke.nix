@@ -31,7 +31,7 @@ in
   };
 
   flake.modules.nixos.users-luke =
-    { pkgs, ... }:
+    { ... }:
     {
       imports = [
         inputs.home-manager.nixosModules.default
@@ -40,6 +40,7 @@ in
         self.modules.nixos.niri
         self.modules.nixos.theme-compline
         self.modules.nixos.zellij
+        self.modules.nixos.librewolf
       ];
 
       users.users.luke = {
@@ -50,10 +51,6 @@ in
       };
 
       home-manager.users.luke = self.modules.homeManager.luke;
-
-      environment.systemPackages = with pkgs; [
-        librewolf
-      ];
     };
 
   flake.homeConfigurations.luke = home-manager.lib.homeManagerConfiguration {
