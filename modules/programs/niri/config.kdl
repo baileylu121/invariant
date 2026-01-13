@@ -14,6 +14,10 @@ input {
     warp-mouse-to-focus
 }
 
+debug {
+    render-drm-device "/dev/dri/renderD128" // AMD iGPU (0x1002); NVIDIA dGPU is /dev/dri/renderD129 (0x10de)
+}
+
 layout {
     gaps 8
 
