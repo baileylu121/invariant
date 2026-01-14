@@ -88,6 +88,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T { spawn "footclient" "zellij"; }
+    Mod+Alt+T { spawn "footclient"; }
     Mod+B { spawn "librewolf"; }
     Mod+N { spawn "footclient" "nvim"; }
     Mod+A { spawn "sysmenu"; }
