@@ -8,4 +8,6 @@ return {
   { 'direnv-vim', event = 'DeferredUIEnter' },
   -- Lazygit
   { 'lazygit', event = 'DeferredUIEnter' },
+  -- Plenary
+  { 'plenary.nvim', event = 'DeferredUIEnter' },
 }

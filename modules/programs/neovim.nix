@@ -68,6 +68,7 @@ in
 
             lazy-lsp-nvim
             direnv-vim
+            lean-nvim
           ];
         };
       };
