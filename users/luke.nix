@@ -1,4 +1,9 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  self,
+  lib,
+  ...
+}:
 let
   inherit (inputs) home-manager nixpkgs;
 in
@@ -56,5 +61,16 @@ in
   flake.homeConfigurations.luke = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     modules = [ self.modules.homeManager.luke ];
+  };
+
+  flake.homeConfigurations.baileylu = home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      self.modules.homeManager.luke
+      {
+        home.username = lib.mkForce "baileylu";
+        home.homeDirectory = lib.mkForce "/home/baileylu";
+      }
+    ];
   };
 }
