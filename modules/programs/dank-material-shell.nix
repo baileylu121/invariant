@@ -3,6 +3,7 @@
   ...
 }:
 let
+
   mkDmsConfig =
     {
       dms-shell,
@@ -91,6 +92,15 @@ let
 
         exec dms run "$@"
       '';
+
+      passthru = {
+        inherit
+          settingsJson
+          cacheJson
+          sessionJson
+          theme
+          ;
+      };
     };
 in
 {
@@ -132,5 +142,44 @@ in
     in
     {
       environment.systemPackages = [ dms ];
+
+      home-manager.sharedModules = [
+        {
+          home.file = {
+            ".config/DankMaterialShell/settings.json".source = dms.settingsJson;
+            ".cache/DankMaterialShell/cache.json".source = dms.cacheJson;
+            ".local/state/DankMaterialShell/session.json".source = dms.sessionJson;
+          };
+        }
+      ];
+
+      services.displayManager.dms-greeter =
+        let
+          cfgFiles = pkgs.linkFarm "dms-cfg" [
+            {
+              name = "settings.json";
+              path = dms.settingsJson;
+            }
+            {
+              name = "session.json";
+              path = dms.sessionJson;
+            }
+            {
+              name = "cache.json";
+              path = dms.cacheJson;
+            }
+          ];
+        in
+        {
+          enable = true;
+          logs.save = true;
+          compositor.name = "niri";
+          compositor.customConfig = builtins.readFile config.niriConfig;
+          configFiles = [
+            "${cfgFiles}/settings.json"
+            "${cfgFiles}/session.json"
+            "${cfgFiles}/cache.json"
+          ];
+        };
     };
 }

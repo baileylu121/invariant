@@ -14,7 +14,6 @@ in
 
       self.modules.nixos.battery
 
-      self.modules.nixos.display-manager
       self.modules.nixos.locale
       self.modules.nixos.nix-settings
 
