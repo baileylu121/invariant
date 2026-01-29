@@ -30,6 +30,7 @@
 
                 settings = {
                   "webgl.disabled" = true;
+                  "permissions.default.shortcuts" = 2;
                 };
               };
             };
