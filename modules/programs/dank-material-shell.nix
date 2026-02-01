@@ -10,7 +10,7 @@ let
       pkgs,
       wallpaper ? ./dank-material-shell/sunset-mountains.jpg,
       font ? "Montserrat",
-      fontMono ? "Fira Code",
+      fontMono ? "GeistMono Nerd Font",
 
       base00 ? "#1a1d21",
       base01 ? "#22262b",

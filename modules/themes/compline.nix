@@ -50,8 +50,8 @@ in
           };
 
           monospace = {
-            package = pkgs.fira-code;
-            name = "Fira Code";
+            package = pkgs.nerd-fonts.geist-mono;
+            name = "GeistMono Nerd Font";
           };
 
           emoji = {
