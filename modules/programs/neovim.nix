@@ -111,6 +111,8 @@ in
               self'.packages.direnv
               tree-sitter
               lazygit
+
+              gcc
             ];
 
             text = ''

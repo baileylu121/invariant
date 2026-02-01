@@ -27,10 +27,10 @@ return {
         },
       },
 
-      modules = {},
-
-      highlight = {
-        enable = true,
+      modules = {
+        highlight = {
+          enable = true,
+        },
       },
     }
   end,

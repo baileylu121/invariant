@@ -2,6 +2,7 @@
 require 'editor.keymaps'
 require 'editor.opts'
 require 'editor.autocommands'
+require 'editor.treesitter-autoattach'
 
 -- Load plugins from the ./lua/plugins/ directory
 require('lz.n').load 'plugins'
