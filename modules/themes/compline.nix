@@ -15,20 +15,20 @@ in
         base16Scheme = {
           base00 = "1a1d21";
           base01 = "22262b";
-          base02 = "282c34";
+          base02 = "1f2228";
           base03 = "3d424a";
-          base04 = "c0bdb8";
-          base05 = "e0dcd4";
-          base06 = "e8e4dc";
-          base07 = "f5f2eb";
+          base04 = "515761";
+          base05 = "676d77";
+          base06 = "8b919a";
+          base07 = "e0dcd4";
           base08 = "c8beb8";
-          base09 = "c8c0b0";
-          base0A = "ccc4b0";
-          base0B = "b4beb4";
-          base0C = "b0bcc8";
-          base0D = "b4bec8";
-          base0E = "c4beb8";
-          base0F = "c0b8bc";
+          base09 = "ccc4b4";
+          base0A = "d4ccb4";
+          base0B = "b8c4b8";
+          base0C = "b4c0c8";
+          base0D = "b4bcc4";
+          base0E = "b4c4bc";
+          base0F = "98a4ac";
         };
 
         image = pkgs.copyPathToStore ./compline/sunset-mountains.jpg;

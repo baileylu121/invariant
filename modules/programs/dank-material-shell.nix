@@ -14,15 +14,15 @@ let
 
       base00 ? "#1a1d21",
       base01 ? "#22262b",
-      base02 ? "#282c34",
+      base02 ? "#1f2228",
       base03 ? "#3d424a",
-      base05 ? "#e0dcd4",
-      base06 ? "#e8e4dc",
+      base06 ? "#8b919a",
+      base07 ? "#e0dcd4",
       base08 ? "#c8beb8",
-      base0A ? "#ccc4b0",
-      base0C ? "#b0bcc8",
-      base0D ? "#b4bec8",
-      base0E ? "#c4beb8",
+      base0A ? "#d4ccb4",
+      base0C ? "#b4c0c8",
+      base0D ? "#b4bcc4",
+      base0E ? "#b4c4bc",
     }:
     let
       theme = builtins.toFile "theme.json" (
@@ -37,12 +37,12 @@ let
           surfaceTint = base0D;
 
           surface = base01;
-          surfaceText = base05;
+          surfaceText = base06;
           surfaceVariant = base02;
-          surfaceVariantText = base06;
+          surfaceVariantText = base07;
 
           background = base00;
-          backgroundText = base05;
+          backgroundText = base06;
 
           outline = base03;
 
@@ -89,6 +89,7 @@ let
         ln -sf ${settingsJson} "$XDG_CONFIG_HOME/DankMaterialShell/settings.json"
         ln -sf ${cacheJson} "$XDG_CACHE_HOME/DankMaterialShell/cache.json"
         ln -sf ${sessionJson} "$XDG_STATE_HOME/DankMaterialShell/session.json"
+        ln -sf ${theme} "$XDG_CONFIG_HOME/DankMaterialShell/theme.json"
 
         exec dms run "$@"
       '';
@@ -130,8 +131,8 @@ in
           base01
           base02
           base03
-          base05
           base06
+          base07
           base08
           base0A
           base0C
