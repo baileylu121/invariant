@@ -13,9 +13,9 @@ let
       fontMono ? "GeistMono Nerd Font",
 
       base00 ? "#1a1d21",
-      base01 ? "#22262b",
       base02 ? "#1f2228",
       base03 ? "#3d424a",
+      base04 ? "515761",
       base06 ? "#8b919a",
       base07 ? "#e0dcd4",
       base08 ? "#c8beb8",
@@ -30,16 +30,20 @@ let
           name = "stylix";
 
           primary = base0D;
-          primaryText = base01;
+          primaryText = base04;
           primaryContainer = base0C;
 
           secondary = base0E;
           surfaceTint = base0D;
 
-          surface = base01;
+          surface = base00;
           surfaceText = base06;
           surfaceVariant = base02;
           surfaceVariantText = base07;
+
+          surfaceContainer = base00;
+          surfaceContainerHigh = base02;
+          surfaceContainerHighest = base03;
 
           background = base00;
           backgroundText = base06;
@@ -128,9 +132,9 @@ in
 
         inherit (config.lib.stylix.colors.withHashtag)
           base00
-          base01
           base02
           base03
+          base04
           base06
           base07
           base08
