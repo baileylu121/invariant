@@ -9,8 +9,8 @@ let
       dms-shell,
       pkgs,
       wallpaper ? ./dank-material-shell/sunset-mountains.jpg,
-      font ? "Geist",
-      fontMono ? "Geist Mono",
+      font ? "Montserrat",
+      fontMono ? "Fira Code",
 
       base00 ? "#1a1d21",
       base01 ? "#22262b",

@@ -40,18 +40,18 @@ in
 
         fonts = {
           serif = {
-            package = pkgs.geist-font;
-            name = "Geist";
+            package = pkgs.montserrat;
+            name = "Montserrat";
           };
 
           sansSerif = {
-            package = pkgs.geist-font;
-            name = "Geist Sans";
+            package = pkgs.montserrat;
+            name = "Montserrat";
           };
 
           monospace = {
-            package = pkgs.nerd-fonts.geist-mono;
-            name = "Geist Mono";
+            package = pkgs.fira-code;
+            name = "Fira Code";
           };
 
           emoji = {
