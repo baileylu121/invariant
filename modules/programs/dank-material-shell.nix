@@ -30,7 +30,7 @@ let
           name = "stylix";
 
           primary = base0D;
-          primaryText = base00;
+          primaryText = base01;
           primaryContainer = base0C;
 
           secondary = base0E;

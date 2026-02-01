@@ -18,7 +18,7 @@ in
           base02 = "1f2228";
           base03 = "3d424a";
           base04 = "515761";
-          base05 = "676d77";
+          base05 = "e0dcd4";
           base06 = "8b919a";
           base07 = "e0dcd4";
           base08 = "c8beb8";
