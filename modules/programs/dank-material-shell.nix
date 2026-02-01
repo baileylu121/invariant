@@ -37,7 +37,7 @@ let
           surfaceTint = base0D;
 
           surface = base00;
-          surfaceText = base06;
+          surfaceText = base07;
           surfaceVariant = base02;
           surfaceVariantText = base07;
 
