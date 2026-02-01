@@ -50,7 +50,10 @@ in
 
       users.users.luke = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = [
+          "wheel"
+          "docker"
+        ];
         initialPassword = "4835";
         linger = true;
       };

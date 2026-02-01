@@ -8,12 +8,6 @@
       home-manager.sharedModules = [
         (
           { config, ... }:
-          let
-            inherit (config.lib.stylix.colors.withHashtag)
-              base01
-              base07
-              ;
-          in
           {
             programs.librewolf = {
               enable = true;

@@ -11,6 +11,7 @@ in
 
       self.modules.nixos.audio
       self.modules.nixos.networking
+      self.modules.nixos.virtualisation
 
       self.modules.nixos.battery
 
