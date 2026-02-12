@@ -372,7 +372,7 @@
             "transparency": 1,
             "widgetTransparency": 1,
             "squareCorners": true,
-            "noBackground": true,
+            "noBackground": false,
             "gothCornersEnabled": true,
             "gothCornerRadiusOverride": true,
             "gothCornerRadiusValue": 16,
