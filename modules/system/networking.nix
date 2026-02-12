@@ -7,8 +7,7 @@
     networking.networkmanager.enable = true;
 
     networking.nftables.enable = true;
-    networking.firewall.checkReversePath = "loose";
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    networking.firewall.checkReversePath = false;
 
     hardware.bluetooth = {
       enable = true;
