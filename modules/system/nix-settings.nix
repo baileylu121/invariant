@@ -15,6 +15,7 @@
       ];
       http-connections = 128;
       max-substitution-jobs = 128;
+      sandbox = "relaxed";
     };
 
     system.stateVersion = "25.11";
