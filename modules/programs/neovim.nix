@@ -66,7 +66,14 @@ in
 
             startup-nvim
 
-            lazy-lsp-nvim
+            (lazy-lsp-nvim.overrideAttrs {
+              src = pkgs.fetchFromGitHub {
+                owner = "baileylu121";
+                repo = "lazy-lsp.nvim";
+                rev = "master";
+                hash = "sha256-70roDFHMY2MB2d7wPrPbWdLqhr8r8TMkYTpaGI/GRRU=";
+              };
+            })
             direnv-vim
             lean-nvim
           ];
