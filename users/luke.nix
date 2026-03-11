@@ -36,7 +36,7 @@ in
   };
 
   flake.modules.nixos.users-luke =
-    { ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.home-manager.nixosModules.default
@@ -46,6 +46,11 @@ in
         self.modules.nixos.theme-compline
         self.modules.nixos.zellij
         self.modules.nixos.librewolf
+      ];
+
+      environment.systemPackages = [
+        pkgs.chromium
+        pkgs.dorion
       ];
 
       users.users.luke = {
