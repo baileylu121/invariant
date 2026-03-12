@@ -12,7 +12,7 @@ in
     home-manager.flakeModules.home-manager
   ];
 
-  flake.modules.homeManager.luke = {
+  flake.modules.homeManager.luke = ({ pkgs, ... }: {
     imports = [
       self.modules.homeManager.bash
       self.modules.homeManager.comma
@@ -22,9 +22,12 @@ in
 
     programs.git = {
       enable = true;
-      settings.user = {
-        email = "baileylu@tcd.ie";
-        name = "Luke Bailey";
+      settings = {
+        user = {
+          email = "baileylu@tcd.ie";
+          name = "Luke Bailey";
+        };
+        core.pager = "delta";
       };
     };
 
@@ -32,8 +35,9 @@ in
       username = "luke";
       stateVersion = "25.11";
       homeDirectory = "/home/luke";
+      packages = [ pkgs.delta ];
     };
-  };
+  });
 
   flake.modules.nixos.users-luke =
     { pkgs, ... }:
