@@ -12,32 +12,34 @@ in
     home-manager.flakeModules.home-manager
   ];
 
-  flake.modules.homeManager.luke = ({ pkgs, ... }: {
-    imports = [
-      self.modules.homeManager.bash
-      self.modules.homeManager.comma
-      self.modules.homeManager.neovim
-      self.modules.homeManager.nix-settings
-    ];
+  flake.modules.homeManager.luke = { pkgs, ... }:
+    {
+      imports = [
+        self.modules.homeManager.bash
+        self.modules.homeManager.comma
+        self.modules.homeManager.neovim
+        self.modules.homeManager.opencode
+        self.modules.homeManager.nix-settings
+      ];
 
-    programs.git = {
-      enable = true;
-      settings = {
-        user = {
-          email = "baileylu@tcd.ie";
-          name = "Luke Bailey";
+      programs.git = {
+        enable = true;
+        settings = {
+          user = {
+            email = "baileylu@tcd.ie";
+            name = "Luke Bailey";
+          };
+          core.pager = "delta";
         };
-        core.pager = "delta";
+      };
+
+      home = {
+        username = "luke";
+        stateVersion = "25.11";
+        homeDirectory = "/home/luke";
+        packages = [ pkgs.delta ];
       };
     };
-
-    home = {
-      username = "luke";
-      stateVersion = "25.11";
-      homeDirectory = "/home/luke";
-      packages = [ pkgs.delta ];
-    };
-  });
 
   flake.modules.nixos.users-luke =
     { pkgs, ... }:

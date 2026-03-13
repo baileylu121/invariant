@@ -34,6 +34,9 @@
       url = "github:AvengeMedia/DankMaterialShell?tag=v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bun2nix.url = "github:nix-community/bun2nix";
+    bun2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
