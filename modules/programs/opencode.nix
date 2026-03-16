@@ -47,9 +47,9 @@ let
     let
       unknown = builtins.filter (name: !(builtins.elem name baseColorNames)) (builtins.attrNames colors);
     in
-    assert lib.assertMsg (unknown == [ ]) (
-      "mkOpencode: unknown color keys: ${lib.concatStringsSep ", " unknown}"
-    );
+    assert lib.assertMsg (
+      unknown == [ ]
+    ) "mkOpencode: unknown color keys: ${lib.concatStringsSep ", " unknown}";
     defaultColors // colors;
 
   mkPlugin =
@@ -199,6 +199,19 @@ let
           export { default } from "${oh-my-opencode-plugin}/lib/node_modules/oh-my-opencode/dist/index.js";
         '';
       };
+
+      omoConfig = pkgs.writeText "oh-my-opencode.json" (
+        builtins.toJSON {
+          "$schema" =
+            "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
+          agents = {
+            explore = {
+              model = "venice/grok-code-fast-1";
+              fallback_models = [ "venice/zai-org-glm-4.7-flash" ];
+            };
+          };
+        }
+      );
     in
     pkgs.writeShellApplication {
       name = "opencode";
@@ -214,6 +227,7 @@ let
         ln -s ${themeJson} "$cfg/opencode/themes/stylix.json"
         ln -s ${tuiJson} "$cfg/opencode/tui.json"
         ln -s ${pluginShim} "$cfg/opencode/plugins/oh-my-opencode.js"
+        ln -s ${omoConfig} "$cfg/opencode/oh-my-opencode.json"
 
         export XDG_CONFIG_HOME="$cfg"
         ${pkgs.opencode}/bin/opencode "$@"
@@ -239,18 +253,18 @@ let
       compatible = lib.versions.majorMinor pkgs.opencode.version == expectedOpencodeSeries;
       oh-my-opencode-plugin = mkPluginFor pkgs;
     in
-    assert lib.assertMsg compatible (
-      "oh-my-opencode ${pluginVersion} expects opencode ${expectedOpencodeSeries}.x, got ${pkgs.opencode.version}"
-    );
+    assert lib.assertMsg compatible
+      "oh-my-opencode ${pluginVersion} expects opencode ${expectedOpencodeSeries}.x, got ${pkgs.opencode.version}";
     (mkOpencode {
       inherit
         pkgs
         oh-my-opencode-plugin
         colors
         ;
-    }).overrideAttrs {
-      inherit (pkgs.opencode) version;
-    };
+    }).overrideAttrs
+      {
+        inherit (pkgs.opencode) version;
+      };
 in
 {
   perSystem =
