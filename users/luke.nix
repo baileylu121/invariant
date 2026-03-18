@@ -12,7 +12,11 @@ in
     home-manager.flakeModules.home-manager
   ];
 
-  flake.modules.homeManager.luke = { pkgs, ... }:
+  flake.modules.homeManager.luke =
+    { pkgs, ... }:
+    let
+      inherit (pkgs.stdenv.hostPlatform) system;
+    in
     {
       imports = [
         self.modules.homeManager.bash
@@ -37,7 +41,10 @@ in
         username = "luke";
         stateVersion = "25.11";
         homeDirectory = "/home/luke";
-        packages = [ pkgs.delta ];
+        packages = [
+          pkgs.delta
+          self.packages.${system}.ik-llama-server
+        ];
       };
     };
 

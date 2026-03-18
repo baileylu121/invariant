@@ -200,6 +200,26 @@ let
         '';
       };
 
+      opencodeConfig = pkgs.writeText "opencode.json" (
+        builtins.toJSON {
+          "$schema" = "https://opencode.ai/config.json";
+          provider = {
+            omnicoder = {
+              npm = "@ai-sdk/openai-compatible";
+              name = "OmniCoder (local)";
+              options.baseURL = "http://127.0.0.1:8080/v1";
+              models.omnicoder-9b = {
+                name = "OmniCoder 9B Q4_K_M";
+                limit = {
+                  context = 131072;
+                  output = 8192;
+                };
+              };
+            };
+          };
+        }
+      );
+
       omoConfig = pkgs.writeText "oh-my-opencode.json" (
         builtins.toJSON {
           "$schema" =
@@ -215,7 +235,10 @@ let
     in
     pkgs.writeShellApplication {
       name = "opencode";
-      runtimeInputs = [ pkgs.opencode ];
+      runtimeInputs = [
+        pkgs.opencode
+        pkgs.nodejs
+      ];
       text = ''
         cfg="$(mktemp -d)"
         cleanup() {
@@ -228,6 +251,7 @@ let
         ln -s ${tuiJson} "$cfg/opencode/tui.json"
         ln -s ${pluginShim} "$cfg/opencode/plugins/oh-my-opencode.js"
         ln -s ${omoConfig} "$cfg/opencode/oh-my-opencode.json"
+        ln -s ${opencodeConfig} "$cfg/opencode/opencode.json"
 
         export XDG_CONFIG_HOME="$cfg"
         ${pkgs.opencode}/bin/opencode "$@"
