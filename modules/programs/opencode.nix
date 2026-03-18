@@ -226,8 +226,8 @@ let
             "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
           agents = {
             explore = {
-              model = "venice/grok-code-fast-1";
-              fallback_models = [ "venice/zai-org-glm-4.7-flash" ];
+              model = "venice/zai-org-glm-4.7-flash";
+              fallback_models = [ "anthropic/claude-haiku-4-5" ];
             };
           };
         }
