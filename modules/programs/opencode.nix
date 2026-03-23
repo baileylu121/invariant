@@ -1,11 +1,9 @@
 {
   self,
-  inputs,
   lib,
   ...
 }:
 let
-  pluginVersion = "3.11.0";
   expectedOpencodeSeries = "1.2";
 
   baseColorNames = [
@@ -52,53 +50,11 @@ let
     ) "mkOpencode: unknown color keys: ${lib.concatStringsSep ", " unknown}";
     defaultColors // colors;
 
-  mkPlugin =
-    { pkgs, bun2nix }:
-    pkgs.stdenv.mkDerivation {
-      pname = "oh-my-opencode";
-      version = pluginVersion;
-
-      src = pkgs.fetchFromGitHub {
-        owner = "code-yeongyu";
-        repo = "oh-my-openagent";
-        rev = "66256700799e2411ca46ad4063b3c6c364f68f8d";
-        hash = "sha256-x9NkiKrfpRDc1W95ghFPHAm4d6YOZMoCn06lumrXROo=";
-      };
-
-      nativeBuildInputs = [ bun2nix.hook ];
-
-      bunDeps = bun2nix.fetchBunDeps {
-        bunNix = ../../pkgs/oh-my-opencode/bun.nix;
-        autoPatchElf = true;
-        nativeBuildInputs = [ pkgs.musl ];
-      };
-
-      dontRunLifecycleScripts = true;
-      dontUseBunCheck = true;
-
-      buildPhase = ''
-        bun build src/index.ts \
-          --outdir dist \
-          --target bun \
-          --format esm \
-          --external @ast-grep/napi
-        bun build src/cli/index.ts \
-          --outdir dist/cli \
-          --target bun \
-          --format esm \
-          --external @ast-grep/napi
-      '';
-
-      installPhase = ''
-        mkdir -p "$out/lib/node_modules/oh-my-opencode"
-        cp -r dist bin package.json "$out/lib/node_modules/oh-my-opencode/"
-      '';
-    };
-
   mkOpencode =
     {
       pkgs,
       oh-my-opencode-plugin,
+      claude-auth-plugin,
       colors ? { },
     }:
     let
@@ -200,6 +156,13 @@ let
         '';
       };
 
+      claudeAuthShim = pkgs.writeTextFile {
+        name = "opencode-claude-auth-shim.js";
+        text = ''
+          export { default } from "${claude-auth-plugin}/lib/node_modules/opencode-claude-auth/dist/index.js";
+        '';
+      };
+
       opencodeConfig = pkgs.writeText "opencode.json" (
         builtins.toJSON {
           "$schema" = "https://opencode.ai/config.json";
@@ -229,6 +192,10 @@ let
               model = "venice/zai-org-glm-4.7-flash";
               fallback_models = [ "anthropic/claude-haiku-4-5" ];
             };
+            hephaestus = {
+              model = "venice/grok-code-fast-1";
+              fallback_models = [ "anthropic/claude-haiku-4-5" ];
+            };
           };
         }
       );
@@ -250,6 +217,7 @@ let
         ln -s ${themeJson} "$cfg/opencode/themes/stylix.json"
         ln -s ${tuiJson} "$cfg/opencode/tui.json"
         ln -s ${pluginShim} "$cfg/opencode/plugins/oh-my-opencode.js"
+        ln -s ${claudeAuthShim} "$cfg/opencode/plugins/opencode-claude-auth.js"
         ln -s ${omoConfig} "$cfg/opencode/oh-my-opencode.json"
         ln -s ${opencodeConfig} "$cfg/opencode/opencode.json"
 
@@ -261,28 +229,23 @@ let
       '';
     };
 
-  mkPluginFor =
-    pkgs:
-    let
-      bun2nix = inputs.bun2nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    in
-    mkPlugin { inherit pkgs bun2nix; };
-
   mkWrapped =
     {
       pkgs,
+      oh-my-opencode-plugin,
+      claude-auth-plugin,
       colors ? { },
     }:
     let
       compatible = lib.versions.majorMinor pkgs.opencode.version == expectedOpencodeSeries;
-      oh-my-opencode-plugin = mkPluginFor pkgs;
     in
     assert lib.assertMsg compatible
-      "oh-my-opencode ${pluginVersion} expects opencode ${expectedOpencodeSeries}.x, got ${pkgs.opencode.version}";
+      "oh-my-opencode ${oh-my-opencode-plugin.version} expects opencode ${expectedOpencodeSeries}.x, got ${pkgs.opencode.version}";
     (mkOpencode {
       inherit
         pkgs
         oh-my-opencode-plugin
+        claude-auth-plugin
         colors
         ;
     }).overrideAttrs
@@ -292,9 +255,13 @@ let
 in
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, self', ... }:
+    let
+      inherit (self'.packages) oh-my-opencode-plugin;
+      claude-auth-plugin = self'.packages.opencode-claude-auth-plugin;
+    in
     {
-      packages.opencode = mkWrapped { inherit pkgs; };
+      packages.opencode = mkWrapped { inherit pkgs oh-my-opencode-plugin claude-auth-plugin; };
     };
 
   flake.modules.homeManager.opencode =
@@ -310,9 +277,12 @@ in
   flake.modules.nixos.opencode =
     { pkgs, config, ... }:
     let
+      inherit (pkgs.stdenv.hostPlatform) system;
+      inherit (self.packages.${system}) oh-my-opencode-plugin;
+      claude-auth-plugin = self.packages.${system}.opencode-claude-auth-plugin;
       stylixColors = lib.genAttrs baseColorNames (name: config.lib.stylix.colors.withHashtag.${name});
       wrapped = mkWrapped {
-        inherit pkgs;
+        inherit pkgs oh-my-opencode-plugin claude-auth-plugin;
         colors = stylixColors;
       };
     in
