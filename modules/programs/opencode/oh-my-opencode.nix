@@ -3,7 +3,7 @@
   ...
 }:
 let
-  pluginVersion = "3.11.0";
+  pluginVersion = "3.12.3";
 in
 {
   perSystem =
@@ -19,8 +19,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "code-yeongyu";
           repo = "oh-my-openagent";
-          rev = "66256700799e2411ca46ad4063b3c6c364f68f8d";
-          hash = "sha256-x9NkiKrfpRDc1W95ghFPHAm4d6YOZMoCn06lumrXROo=";
+          rev = "01e18f87735bc011b68feffbf252911015eaf958";
+          hash = "sha256-8iIpKs0R42NclKqNLfllByHNcKljRn33W8Ij7h0wYfw=";
         };
 
         nativeBuildInputs = [ bun2nix.hook ];

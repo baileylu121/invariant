@@ -19,6 +19,10 @@ let
 
       bat
       eza
+      ripgrep
+      ast-grep
+      fd
+      jq
 
       git
       lazygit
