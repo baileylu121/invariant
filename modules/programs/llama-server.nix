@@ -1,47 +1,42 @@
-{ inputs, lib, ... }:
+{ lib, ... }:
 let
-  omnicoder-9b =
+  nemotron-cascade-2 =
     pkgs:
     pkgs.fetchurl {
-      url = "https://huggingface.co/Tesslate/OmniCoder-9B-GGUF/resolve/main/omnicoder-9b-q4_k_m.gguf";
-      hash = "sha256-VQ6PclPI4HmX+84lcNNyWbabDSH6935e1RjU7kxz2LM=";
+      url = "https://huggingface.co/mradermacher/Nemotron-Cascade-2-30B-A3B-GGUF/resolve/main/Nemotron-Cascade-2-30B-A3B.IQ4_XS.gguf";
+      hash = "sha256-1PJA8WYxV2PYbS2DNtyUE0RxGm5UfqsxGcxe/HpiHxU=";
     };
 
   mkLlamaServer =
     {
       pkgs,
-      flashAttention ? true,
     }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      model = omnicoder-9b pkgs;
-      cudaPkg = inputs.ik_llama.packages.${system}.cuda.overrideAttrs (old: {
-        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -march=znver5 -mtune=znver5";
-      });
+      model = nemotron-cascade-2 pkgs;
     in
     pkgs.writeShellApplication {
-      name = "ik-llama-server";
-      runtimeInputs = [ cudaPkg ];
+      name = "llama-server-nemotron";
+      runtimeInputs = [ pkgs.llama-cpp ];
       runtimeEnv = {
         __NV_PRIME_RENDER_OFFLOAD = 1;
         __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        GGML_CUDA_GRAPH_OPT = 1;
       };
       text = ''
         exec llama-server \
           --model ${model} \
-          --flash-attn ${if flashAttention then "on" else "off"} \
-          --cache-type-k q4_0 \
-          --cache-type-v q4_0 \
-          --threads 24 \
-          --parallel 4 \
-          --ctx-size 65536 \
-          --reasoning-budget 0 \
-          --gpu-layers 99 \
-          --run-time-repack \
-          --alias omnicoder-9b \
-          --jinja \
-          --ctx-checkpoints 0 \
+          -c 65536 \
+          --parallel 1 \
+          --threads-batch 24 \
+          -fa on \
+          -fit on \
+          --fit-target 512 \
+          --cache-type-k q8_0 \
+          --cache-type-v q8_0 \
+          -t 12 \
+          --temp 1.0 \
+          --top-p 0.95 \
           "$@"
       '';
     };
@@ -50,21 +45,21 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      packages.ik-llama-server = mkLlamaServer { inherit pkgs; };
+      packages.llama-server = mkLlamaServer { inherit pkgs; };
     };
 
-  flake.modules.nixos.ik-llama-server =
+  flake.modules.nixos.llama-server =
     { config, pkgs, ... }:
     let
-      cfg = config.services.ik-llama-server;
+      cfg = config.services.llama-server;
       llamaServer = mkLlamaServer {
         inherit pkgs;
         inherit (cfg) flashAttention;
       };
     in
     {
-      options.services.ik-llama-server = {
-        enable = lib.mkEnableOption "ik_llama.cpp llama-server with OmniCoder 9B";
+      options.services.llama-server = {
+        enable = lib.mkEnableOption "llama.cpp llama-server with Nemotron-Cascade-2";
 
         flashAttention = lib.mkOption {
           type = lib.types.bool;
@@ -86,7 +81,7 @@ in
 
         contextSize = lib.mkOption {
           type = lib.types.int;
-          default = 131072;
+          default = 65536;
           description = "Context window size in tokens.";
         };
 
@@ -113,20 +108,20 @@ in
         users.users.llama-server = {
           isSystemUser = true;
           group = "llama-server";
-          description = "ik_llama.cpp llama-server service user";
+          description = "llama.cpp llama-server service user";
         };
 
         users.groups.llama-server = { };
 
-        systemd.services.ik-llama-server = {
-          description = "ik_llama.cpp llama-server (OmniCoder 9B)";
+        systemd.services.llama-server = {
+          description = "llama.cpp llama-server (Nemotron Cascade 2 30B A3B)";
           wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
 
           serviceConfig = {
             ExecStart = lib.escapeShellArgs (
               [
-                "${llamaServer}/bin/ik-llama-server"
+                "${llamaServer}/bin/llama-server"
                 "--host"
                 cfg.host
                 "--port"

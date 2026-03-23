@@ -40,10 +40,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ik_llama = {
-      url = "github:aliez-ren/ik_llama.cpp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   nixConfig = {

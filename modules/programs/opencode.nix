@@ -204,14 +204,14 @@ let
         builtins.toJSON {
           "$schema" = "https://opencode.ai/config.json";
           provider = {
-            omnicoder = {
+            nemotron-cascade-2 = {
               npm = "@ai-sdk/openai-compatible";
-              name = "OmniCoder (local)";
+              name = "Nemotron Cascade 2 (local)";
               options.baseURL = "http://127.0.0.1:8080/v1";
-              models.omnicoder-9b = {
-                name = "OmniCoder 9B Q4_K_M";
+              models.nemotron-cascade-2 = {
+                name = "Nemotron Cascade 2 30B A3B Q4_K_M";
                 limit = {
-                  context = 131072;
+                  context = 124000;
                   output = 8192;
                 };
               };
