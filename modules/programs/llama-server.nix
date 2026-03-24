@@ -1,22 +1,29 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 let
-  nemotron-cascade-2 =
+  qwen-3_5-35b-a3b =
     pkgs:
     pkgs.fetchurl {
-      url = "https://huggingface.co/mradermacher/Nemotron-Cascade-2-30B-A3B-GGUF/resolve/main/Nemotron-Cascade-2-30B-A3B.IQ4_XS.gguf";
-      hash = "sha256-1PJA8WYxV2PYbS2DNtyUE0RxGm5UfqsxGcxe/HpiHxU=";
+      url = "https://huggingface.co/bartowski/Qwen_Qwen3.5-35B-A3B-GGUF/resolve/main/Qwen_Qwen3.5-35B-A3B-Q5_K_M.gguf";
+      hash = "sha256-8JLxFeLGGUGjni6cbmIqfq3hmGmmY9Q1vuk1/o3VtVk=";
     };
 
   mkLlamaServer =
     {
       pkgs,
+      system,
     }:
     let
-      model = nemotron-cascade-2 pkgs;
+      model = qwen-3_5-35b-a3b pkgs;
+      llama-cpp = inputs.ik-llama-cpp.packages.${system}.cuda.overrideDerivation (oldAttrs: {
+        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+          "-DCMAKE_C_FLAGS=-march=znver5"
+          "-DCMAKE_CXX_FLAGS=-march=znver5"
+        ];
+      });
     in
     pkgs.writeShellApplication {
-      name = "llama-server-nemotron";
-      runtimeInputs = [ pkgs.llama-cpp ];
+      name = "llama-server-qwen";
+      runtimeInputs = [ llama-cpp ];
       runtimeEnv = {
         __NV_PRIME_RENDER_OFFLOAD = 1;
         __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
@@ -26,46 +33,39 @@ let
       text = ''
         exec llama-server \
           --model ${model} \
-          -c 65536 \
+          -c 131072 \
           --parallel 1 \
-          --threads-batch 24 \
+          -ngl 99 \
+          --n-cpu-moe 35 \
           -fa on \
-          -fit on \
-          --fit-target 512 \
           --cache-type-k q8_0 \
           --cache-type-v q8_0 \
+          --threads-batch 24 \
           -t 12 \
           --temp 1.0 \
           --top-p 0.95 \
+          --jinja \
           "$@"
       '';
     };
 in
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, system, ... }:
     {
-      packages.llama-server = mkLlamaServer { inherit pkgs; };
+      packages.llama-server = mkLlamaServer { inherit pkgs system; };
     };
 
   flake.modules.nixos.llama-server =
     { config, pkgs, ... }:
     let
       cfg = config.services.llama-server;
-      llamaServer = mkLlamaServer {
-        inherit pkgs;
-        inherit (cfg) flashAttention;
-      };
+      inherit (pkgs.stdenv.hostPlatform) system;
+      llamaServer = mkLlamaServer { inherit pkgs system; };
     in
     {
       options.services.llama-server = {
-        enable = lib.mkEnableOption "llama.cpp llama-server with Nemotron-Cascade-2";
-
-        flashAttention = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "Enable flash attention. Reduces KV cache VRAM usage significantly.";
-        };
+        enable = lib.mkEnableOption "ik_llama.cpp llama-server with Qwen 3.5 35B A3B";
 
         host = lib.mkOption {
           type = lib.types.str;
@@ -81,14 +81,20 @@ in
 
         contextSize = lib.mkOption {
           type = lib.types.int;
-          default = 65536;
+          default = 131072;
           description = "Context window size in tokens.";
         };
 
         gpuLayers = lib.mkOption {
           type = lib.types.int;
-          default = -1;
-          description = "Number of model layers to offload to GPU. -1 offloads all layers.";
+          default = 99;
+          description = "Number of model layers to offload to GPU. 99 offloads all possible layers.";
+        };
+
+        cpuMoeLayers = lib.mkOption {
+          type = lib.types.int;
+          default = 35;
+          description = "Number of MoE expert layers to keep on CPU. Lower = faster but more VRAM. Tune down from 35 until VRAM fills to ~7.5 GB.";
         };
 
         extraArgs = lib.mkOption {
@@ -108,20 +114,20 @@ in
         users.users.llama-server = {
           isSystemUser = true;
           group = "llama-server";
-          description = "llama.cpp llama-server service user";
+          description = "ik_llama.cpp llama-server service user";
         };
 
         users.groups.llama-server = { };
 
         systemd.services.llama-server = {
-          description = "llama.cpp llama-server (Nemotron Cascade 2 30B A3B)";
+          description = "ik_llama.cpp llama-server (Qwen 3.5 35B A3B)";
           wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
 
           serviceConfig = {
             ExecStart = lib.escapeShellArgs (
               [
-                "${llamaServer}/bin/llama-server"
+                "${llamaServer}/bin/llama-server-qwen"
                 "--host"
                 cfg.host
                 "--port"
@@ -130,6 +136,8 @@ in
                 (toString cfg.contextSize)
                 "--n-gpu-layers"
                 (toString cfg.gpuLayers)
+                "--n-cpu-moe"
+                (toString cfg.cpuMoeLayers)
               ]
               ++ cfg.extraArgs
             );
