@@ -30,6 +30,8 @@ let
       glab
       graphite-cli
 
+      btop
+
       self.packages.${system}.direnv
       nh
 
