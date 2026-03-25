@@ -42,9 +42,14 @@ let
           --cache-type-v q8_0 \
           --threads-batch 24 \
           -t 12 \
-          --temp 1.0 \
+          --temp 0.6 \
           --top-p 0.95 \
+          --top-k 20 \
+          --min-p 0.0 \
+          --presence-penalty 0.0 \
+          --repeat-penalty 1.0 \
           --jinja \
+          -b 4096 \
           "$@"
       '';
     };
