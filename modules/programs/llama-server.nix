@@ -50,6 +50,7 @@ let
           --repeat-penalty 1.0 \
           --jinja \
           -b 4096 \
+          --port 16321 \
           "$@"
       '';
     };
@@ -80,7 +81,7 @@ in
 
         port = lib.mkOption {
           type = lib.types.port;
-          default = 8080;
+          default = 16321;
           description = "Port to bind the server to.";
         };
 
