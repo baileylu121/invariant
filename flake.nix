@@ -31,7 +31,7 @@
     };
 
     dank-material-shell = {
-      url = "github:AvengeMedia/DankMaterialShell?tag=v1.2.0";
+      url = "github:AvengeMedia/DankMaterialShell?tag=v1.4.4.";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
