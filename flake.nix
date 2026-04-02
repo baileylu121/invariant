@@ -15,8 +15,6 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-
     nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -31,7 +29,7 @@
     };
 
     dank-material-shell = {
-      url = "github:AvengeMedia/DankMaterialShell?tag=v1.4.4.";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,7 +48,7 @@
   nixConfig = {
     extra-subsituters = [ "https://cache.garnix.io" ];
     extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-    extra-experimental-features = [ "pipe-operators" ];
+    extra-experimental-features = [ "pipe-operator" ];
   };
 
   outputs =
