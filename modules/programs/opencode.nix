@@ -4,7 +4,7 @@
   ...
 }:
 let
-  expectedOpencodeSeries = "1.2";
+  expectedOpencodeSeries = "1.3";
 
   baseColorNames = [
     "base00"
@@ -55,6 +55,7 @@ let
       pkgs,
       oh-my-opencode-plugin,
       claude-auth-plugin,
+      direnv-plugin,
       colors ? { },
     }:
     let
@@ -163,6 +164,13 @@ let
         '';
       };
 
+      direnvShim = pkgs.writeTextFile {
+        name = "opencode-direnv-shim.js";
+        text = ''
+          export { default } from "${direnv-plugin}/lib/node_modules/@simonwjackson/opencode-direnv/dist/index.js";
+        '';
+      };
+
       opencodeConfig = pkgs.writeText "opencode.json" (
         builtins.toJSON {
           "$schema" = "https://opencode.ai/config.json";
@@ -259,6 +267,7 @@ let
         ln -s ${tuiJson} "$cfg/opencode/tui.json"
         ln -s ${pluginShim} "$cfg/opencode/plugins/oh-my-opencode.js"
         ln -s ${claudeAuthShim} "$cfg/opencode/plugins/opencode-claude-auth.js"
+        ln -s ${direnvShim} "$cfg/opencode/plugins/@simonwjackson-opencode-direnv.js"
         ln -s ${omoConfig} "$cfg/opencode/oh-my-opencode.json"
         ln -s ${opencodeConfig} "$cfg/opencode/opencode.json"
 
@@ -275,6 +284,7 @@ let
       pkgs,
       oh-my-opencode-plugin,
       claude-auth-plugin,
+      direnv-plugin,
       colors ? { },
     }:
     let
@@ -287,6 +297,7 @@ let
         pkgs
         oh-my-opencode-plugin
         claude-auth-plugin
+        direnv-plugin
         colors
         ;
     }).overrideAttrs
@@ -300,9 +311,17 @@ in
     let
       inherit (self'.packages) oh-my-opencode-plugin;
       claude-auth-plugin = self'.packages.opencode-claude-auth-plugin;
+      direnv-plugin = self'.packages.opencode-direnv-plugin;
     in
     {
-      packages.opencode = mkWrapped { inherit pkgs oh-my-opencode-plugin claude-auth-plugin; };
+      packages.opencode = mkWrapped {
+        inherit
+          pkgs
+          oh-my-opencode-plugin
+          claude-auth-plugin
+          direnv-plugin
+          ;
+      };
     };
 
   flake.modules.homeManager.opencode =
@@ -321,9 +340,15 @@ in
       inherit (pkgs.stdenv.hostPlatform) system;
       inherit (self.packages.${system}) oh-my-opencode-plugin;
       claude-auth-plugin = self.packages.${system}.opencode-claude-auth-plugin;
+      direnv-plugin = self.packages.${system}.opencode-direnv-plugin;
       stylixColors = lib.genAttrs baseColorNames (name: config.lib.stylix.colors.withHashtag.${name});
       wrapped = mkWrapped {
-        inherit pkgs oh-my-opencode-plugin claude-auth-plugin;
+        inherit
+          pkgs
+          oh-my-opencode-plugin
+          claude-auth-plugin
+          direnv-plugin
+          ;
         colors = stylixColors;
       };
     in
