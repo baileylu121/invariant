@@ -205,27 +205,19 @@ let
               model = "venice/zai-org-glm-4.7-flash";
               fallback_models = [ "anthropic/claude-haiku-4-5" ];
             };
-            # gpt-5.4 agents → opus fallback
             oracle = {
-              model = "openai/gpt-5.4";
-              variant = "high";
-              fallback_models = [ "anthropic/claude-opus-4-6" ];
+              model = "anthropic/claude-opus-4-6";
+              variant = "max";
             };
             momus = {
-              model = "openai/gpt-5.4";
-              variant = "xhigh";
-              fallback_models = [ "anthropic/claude-opus-4-6" ];
+              model = "venice/zai-org-glm-5";
             };
             multimodal-looker = {
-              model = "openai/gpt-5.4";
-              variant = "medium";
-              fallback_models = [ "anthropic/claude-opus-4-6" ];
+              model = "venice/kimi-k2-5";
             };
-            # gpt-5.3-codex agents → sonnet fallback
             hephaestus = {
-              model = "openai/gpt-5.3-codex";
+              model = "venice/openai-gpt-54";
               variant = "medium";
-              fallback_models = [ "anthropic/claude-sonnet-4-6" ];
             };
           };
           categories = {
@@ -233,17 +225,12 @@ let
               model = "venice/minimax-m27";
               fallback_models = [ "anthropic/claude-opus-4-6" ];
             };
-            # gpt-5.4 categories → opus fallback
             ultrabrain = {
-              model = "openai/gpt-5.4";
-              variant = "xhigh";
-              fallback_models = [ "anthropic/claude-opus-4-6" ];
+              model = "anthropic/claude-opus-4-6";
+              variant = "max";
             };
-            # gpt-5.3-codex categories → sonnet fallback
             deep = {
-              model = "openai/gpt-5.3-codex";
-              variant = "medium";
-              fallback_models = [ "anthropic/claude-sonnet-4-6" ];
+              model = "venice/zai-org-glm-5";
             };
           };
         }
