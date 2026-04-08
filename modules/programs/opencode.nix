@@ -197,7 +197,7 @@ let
             "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json";
           agents = {
             sisyphus = {
-              model = "venice/kimi-k2-5";
+              model = "venice/zai-org-glm-5-1";
               variant = "max";
               fallback_models = [ "anthropic/claude-opus-4-6" ];
             };
@@ -210,7 +210,7 @@ let
               variant = "max";
             };
             momus = {
-              model = "venice/zai-org-glm-5";
+              model = "venice/zai-org-glm-5-1";
             };
             multimodal-looker = {
               model = "venice/kimi-k2-5";
@@ -230,7 +230,7 @@ let
               variant = "max";
             };
             deep = {
-              model = "venice/zai-org-glm-5";
+              model = "venice/zai-org-glm-5-1";
             };
           };
         }
