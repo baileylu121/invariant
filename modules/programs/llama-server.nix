@@ -1,10 +1,10 @@
 { inputs, lib, ... }:
 let
-  qwen-3_5-35b-a3b =
+  qwen-3_6-35b-a3b =
     pkgs:
     pkgs.fetchurl {
-      url = "https://huggingface.co/bartowski/Qwen_Qwen3.5-35B-A3B-GGUF/resolve/main/Qwen_Qwen3.5-35B-A3B-Q5_K_M.gguf";
-      hash = "sha256-8JLxFeLGGUGjni6cbmIqfq3hmGmmY9Q1vuk1/o3VtVk=";
+      url = "https://huggingface.co/bartowski/Qwen_Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen_Qwen3.6-35B-A3B-Q5_K_M.gguf";
+      hash = "sha256-GUqekCS0GWqebJorpiJOr7ZWVyqoAEWhpMmrEvHIPio=";
     };
 
   mkLlamaServer =
@@ -13,7 +13,7 @@ let
       system,
     }:
     let
-      model = qwen-3_5-35b-a3b pkgs;
+      model = qwen-3_6-35b-a3b pkgs;
       llama-cpp = inputs.ik-llama-cpp.packages.${system}.cuda.overrideDerivation (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
           "-DCMAKE_C_FLAGS=-march=znver5"
@@ -33,10 +33,11 @@ let
       text = ''
         exec llama-server \
           --model ${model} \
-          -c 131072 \
+          -c 262144 \
           --parallel 1 \
           -ngl 99 \
-          --n-cpu-moe 35 \
+          --fit \
+          --fit-margin 1024 \
           -fa on \
           --cache-type-k q8_0 \
           --cache-type-v q8_0 \
@@ -49,8 +50,17 @@ let
           --presence-penalty 0.0 \
           --repeat-penalty 1.0 \
           --jinja \
-          -b 4096 \
+          --peg \
+          -b 8192 \
+          -ub 2048 \
           --port 16321 \
+          -mqkv \
+          -muge \
+          -vhad \
+          -khad \
+          --cache-type-k q4_0 \
+          --cache-type-v q4_0 \
+          --chat-template-kwargs '{"preserve_thinking": true}' \
           "$@"
       '';
     };
@@ -71,7 +81,7 @@ in
     in
     {
       options.services.llama-server = {
-        enable = lib.mkEnableOption "ik_llama.cpp llama-server with Qwen 3.5 35B A3B";
+        enable = lib.mkEnableOption "ik_llama.cpp llama-server with Qwen 3.6 35B A3B";
 
         host = lib.mkOption {
           type = lib.types.str;
@@ -126,7 +136,7 @@ in
         users.groups.llama-server = { };
 
         systemd.services.llama-server = {
-          description = "ik_llama.cpp llama-server (Qwen 3.5 35B A3B)";
+          description = "ik_llama.cpp llama-server (Qwen 3.6 35B A3B)";
           wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
 

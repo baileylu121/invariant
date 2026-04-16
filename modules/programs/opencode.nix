@@ -175,12 +175,12 @@ let
         builtins.toJSON {
           "$schema" = "https://opencode.ai/config.json";
           provider = {
-            qwen-3_5-35b-a3b = {
+            qwen-3_6-35b-a3b = {
               npm = "@ai-sdk/openai-compatible";
-              name = "Qwen 3.5 35B A3B (local)";
+              name = "Qwen 3.6 35B A3B (local)";
               options.baseURL = "http://127.0.0.1:8080/v1";
-              models.qwen-3_5-35b-a3b = {
-                name = "Qwen 3.5 35B A3B Q5_K_M";
+              models.qwen-3_6-35b-a3b = {
+                name = "Qwen 3.6 35B A3B UD-Q5_K_XL";
                 limit = {
                   context = 128000;
                   output = 8192;
