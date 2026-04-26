@@ -23,6 +23,7 @@ let
       ast-grep
       fd
       jq
+      gnumake
 
       git
       lazygit
