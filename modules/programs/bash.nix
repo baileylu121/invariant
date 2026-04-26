@@ -24,6 +24,7 @@ let
       fd
       jq
       gnumake
+      lefthook
 
       git
       lazygit
