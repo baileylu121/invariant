@@ -22,7 +22,6 @@ in
         self.modules.homeManager.bash
         self.modules.homeManager.comma
         self.modules.homeManager.neovim
-        self.modules.homeManager.opencode
         self.modules.homeManager.nix-settings
       ];
 

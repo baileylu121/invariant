@@ -1,9 +1,6 @@
 {
   perSystem =
-    { inputs', ... }:
-    let
-      pkgs = inputs'.nixpkgs-rust-wasi.legacyPackages;
-    in
+    { pkgs, ... }:
     {
       packages.zoxide-session-manager = pkgs.pkgsCross.wasi32.rustPlatform.buildRustPackage (finalAttrs: {
         pname = "zoxide-session-manager";

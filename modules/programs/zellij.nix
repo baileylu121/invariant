@@ -40,12 +40,16 @@
     in
     {
       home-manager.sharedModules = [
-        {
-          programs.zellij = {
-            enable = true;
-            package = zellij;
-          };
-        }
+        (
+          { config, ... }:
+          {
+            programs.zellij = {
+              enable = true;
+              package = zellij;
+              settings.theme_dir = "${config.xdg.configHome}/zellij/themes";
+            };
+          }
+        )
       ];
 
       environment.systemPackages = [ zellij ];
