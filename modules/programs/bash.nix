@@ -1,6 +1,7 @@
 {
   self,
   lib,
+  inputs,
   ...
 }:
 let
@@ -31,6 +32,8 @@ let
       gh
       glab
       graphite-cli
+
+      inputs.llm-agents.packages.${system}.omp
 
       btop
 

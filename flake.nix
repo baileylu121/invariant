@@ -22,6 +22,14 @@
 
     stylix.url = "github:nix-community/stylix";
 
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,16 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    bun2nix = {
-      url = "github:nix-community/bun2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ik-llama-cpp = {
       url = "github:ikawrakow/ik_llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   nixConfig = {
