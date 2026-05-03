@@ -80,6 +80,15 @@ layer-rule {
 }
 
 window-rule {
+  match app-id="foot"
+
+  background-effect {
+      blur true
+      xray true
+  }
+}
+
+window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
 }
