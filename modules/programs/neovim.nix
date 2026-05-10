@@ -51,7 +51,6 @@ in
             nvim-lspconfig
             fidget-nvim
 
-            nvim-treesitter
             todo-comments-nvim
 
             nvim-cmp
