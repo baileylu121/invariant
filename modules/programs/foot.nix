@@ -30,6 +30,8 @@
           Type = "simple";
           ExecStart = "${lib.getExe pkgs.foot} --server";
           TimeoutStopSec = "10s";
+          Restart = "always";
+          RestartSec = 5;
         };
         environment = lib.mkForce { };
       };

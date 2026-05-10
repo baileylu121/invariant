@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   ...
 }:
 let
@@ -157,6 +158,25 @@ in
           };
         }
       ];
+
+      systemd.user.services.dms = {
+        enable = true;
+        after = [
+          "graphical-session.target"
+          "niri.service"
+        ];
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        description = "Dank Material Shell Server";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${lib.getExe dms}";
+          TimeoutStopSec = "10s";
+          Restart = "always";
+          RestartSec = 5;
+        };
+        environment = lib.mkForce { };
+      };
 
       services.displayManager.dms-greeter =
         let
