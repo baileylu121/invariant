@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   ...
 }:
@@ -7,7 +6,6 @@ let
 
   mkDmsConfig =
     {
-      dms-shell,
       pkgs,
       wallpaper ? ./dank-material-shell/sunset-mountains.jpg,
       font ? "Montserrat",
@@ -75,7 +73,7 @@ let
 
       runtimeInputs = [
         pkgs.quickshell
-        dms-shell
+        pkgs.dms-shell
       ];
 
       runtimeEnv = {
@@ -111,10 +109,9 @@ let
 in
 {
   perSystem =
-    { pkgs, inputs', ... }:
+    { pkgs, ... }:
     {
       packages.dank-material-shell = mkDmsConfig {
-        inherit (inputs'.dank-material-shell.packages) dms-shell;
         inherit pkgs;
       };
     };
@@ -122,10 +119,7 @@ in
   flake.modules.nixos.dank-material-shell =
     { pkgs, config, ... }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
-
       dms = mkDmsConfig {
-        inherit (inputs.dank-material-shell.packages.${system}) dms-shell;
         inherit pkgs;
         wallpaper = config.stylix.image;
         font = config.stylix.fonts.serif.name;
