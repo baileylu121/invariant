@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 
     -- Attach treesitter highlighting
-    local ok, err = pcall(vim.treesitter.highlighter.new, parser)
+    local ok, err = pcall(vim.treesitter.start, buf)
     if not ok then
       vim.notify('Failed to attach treesitter for ' .. ft .. ': ' .. tostring(err), vim.log.levels.DEBUG)
     end
