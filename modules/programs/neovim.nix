@@ -64,17 +64,19 @@ in
             vim-sleuth
 
             startup-nvim
+            lazy-lsp-nvim
+            direnv-vim
 
-            (lazy-lsp-nvim.overrideAttrs {
+            (pkgs.vimUtils.buildVimPlugin {
+              pname = "arborist-nvim";
+              version = "2026-05-10";
               src = pkgs.fetchFromGitHub {
-                owner = "baileylu121";
-                repo = "lazy-lsp.nvim";
-                rev = "master";
-                hash = "sha256-70roDFHMY2MB2d7wPrPbWdLqhr8r8TMkYTpaGI/GRRU=";
+                owner = "arborist-ts";
+                repo = "arborist.nvim";
+                rev = "main";
+                hash = "sha256-2/rKIK62Yp1dWzXpJKAr8XATPy/h9RyLVOURDcTTBOc=";
               };
             })
-            direnv-vim
-            lean-nvim
           ];
         };
       };
