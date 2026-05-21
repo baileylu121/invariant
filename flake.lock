@@ -386,11 +386,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777735199,
-        "narHash": "sha256-t8yHOAjCkBY3oUujoADL2Mw5Wv9qETRby3gQ5z7vYkg=",
+        "lastModified": 1779081425,
+        "narHash": "sha256-hQIpI9QfldvjROW+sMpruyg0qXxRgFWuyKHvRHc6mJ8=",
         "owner": "ikawrakow",
         "repo": "ik_llama.cpp",
-        "rev": "b8eb8ccbb5b0ba7d9f8e49985c7d43b0a11842bd",
+        "rev": "40aae0b6d86d50c0ee7011b3ce59a233203e430a",
         "type": "github"
       },
       "original": {

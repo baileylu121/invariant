@@ -3,8 +3,8 @@ let
   qwen-3_6-35b-a3b =
     pkgs:
     pkgs.fetchurl {
-      url = "https://huggingface.co/bartowski/Qwen_Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen_Qwen3.6-35B-A3B-Q4_K_M.gguf";
-      hash = "sha256-b1xy4s3n+woVhMwAnNtFE/JnM3QDadPi3w59ckcRLQU=";
+      url = "https://huggingface.com/byteshape/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-Q4_K_S-4.22bpw.gguf";
+      hash = "sha256-nu54tkiirNCBDYImVNwe2YeN2M0lfn2yu7BZ3hl7EJg=";
     };
 
   mkLlamaServer =
