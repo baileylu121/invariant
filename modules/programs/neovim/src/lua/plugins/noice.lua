@@ -8,20 +8,6 @@ return {
   },
   after = function()
     require('noice').setup {
-      cmdline = {
-        enabled = true,
-        view = 'cmdline_popup',
-        opts = {},
-        format = {
-          cmdline = { pattern = ':', icon = ' ', lang = 'vim' },
-          search_down = { kind = 'search', pattern = '/', icon = '🔍 ', lang = 'regex' },
-          search_up = { kind = 'search', pattern = '?', icon = '🔍 ', lang = 'regex' },
-          filter = { pattern = ':%s*!', icon = ' ', lang = 'bash' },
-          lua = { pattern = ':%s*lua%s+', icon = ' ', lang = 'lua' },
-          help = { pattern = ':%s*he?l?p?%s+', icon = ' ', lang = 'vim' },
-          input = { view = 'cmdline_input', icon = '󰥻 ' },
-        },
-      },
       messages = {
         enabled = true,
         view = 'notify',
@@ -91,6 +77,10 @@ return {
           view = 'popup',
           opts = { enter = true, format = 'details' },
         },
+      },
+      cmdline = {
+        enabled = true,
+        view = "cmdline",
       },
     }
   end,
