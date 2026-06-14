@@ -67,6 +67,10 @@ in
             lazy-lsp-nvim
             direnv-vim
 
+            nvim-notify
+            nui-nvim
+            noice-nvim
+
             (pkgs.vimUtils.buildVimPlugin {
               pname = "arborist-nvim";
               version = "2026-05-10";
@@ -75,6 +79,17 @@ in
                 repo = "arborist.nvim";
                 rev = "main";
                 hash = "sha256-2/rKIK62Yp1dWzXpJKAr8XATPy/h9RyLVOURDcTTBOc=";
+              };
+            })
+
+            (pkgs.vimUtils.buildVimPlugin {
+              pname = "pi.nvom";
+              version = "2026-06-14";
+              src = pkgs.fetchFromGitHub {
+                owner = "pablopunk";
+                repo = "pi.nvim";
+                rev = "main";
+                hash = "sha256-z1gN1TKQKrM8dMh8rQMaAtGgi4ELV21WgswJBVyXulE=";
               };
             })
           ];
@@ -119,6 +134,7 @@ in
               self'.packages.direnv
               tree-sitter
               lazygit
+              pi-coding-agent
 
               gcc
             ];
