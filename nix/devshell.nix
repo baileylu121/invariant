@@ -1,9 +1,22 @@
 {
   mkShellNoCC,
-  obsidian,
+  git,
+  emacsWithDoom,
+  ripgrep,
+  coreutils,
+  fd,
+  clang,
 }:
 mkShellNoCC {
   packages = [
-    obsidian
+    git
+    (emacsWithDoom {
+      doomDir = ../.doom.d;
+      doomLocalDir = "~/.local/share/nix-doom";
+    })
+    ripgrep
+    coreutils
+    fd
+    clang
   ];
 }
