@@ -13,6 +13,7 @@ mkShellNoCC {
     (emacsWithDoom {
       doomDir = ../.doom.d;
       doomLocalDir = "~/.local/share/nix-doom";
+      experimentalFetchTree = true;
     })
     ripgrep
     coreutils
