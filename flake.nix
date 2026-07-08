@@ -1,14 +1,22 @@
 {
-  description = "Flake with only nixpkgs dependencies";
+  description = "Doom emacs flake";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs = {
+        doomdir.url = "./.doom.d";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+  };
 
   outputs =
     { nixpkgs, self, ... }:
     let
       systems = [
         "x86_64-linux"
-        "x86_64-darwin"
         "aarch64-linux"
         "aarch64-darwin"
       ];
@@ -18,10 +26,7 @@
         nixpkgs.lib.genAttrs systems (
           system:
           let
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
+            pkgs = nixpkgs.legacyPackages.${system};
           in
           f {
             inherit (pkgs) callPackage;
