@@ -62,7 +62,7 @@ in
 
       environment.systemPackages = [
         pkgs.chromium
-        pkgs.dorion
+        pkgs.discord
       ];
 
       users.users.luke = {
