@@ -77,3 +77,6 @@
 ;; they are implemented.
 
 (after! elfeed-org (setq rmh-elfeed-org-files (list "~/org/elfeed.org")))
+
+(require 'acp)
+(require 'agent-shell)

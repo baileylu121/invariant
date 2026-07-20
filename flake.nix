@@ -3,10 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     doomdir = {
       url = "./.doom.d";
       flake = false;
     };
+
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened/lix-compat";
       inputs = {
@@ -35,9 +37,13 @@
         nixpkgs.lib.genAttrs systems (
           system:
           let
-            pkgs = nixpkgs.legacyPackages.${system}.appendOverlays [
-              nix-doom-emacs-unstraightened.overlays.default
-            ];
+            pkgs = import nixpkgs {
+              inherit system;
+
+              overlays = [ nix-doom-emacs-unstraightened.overlays.default ];
+
+              config.allowUnfree = true;
+            };
           in
           f {
             inherit (pkgs) callPackage;

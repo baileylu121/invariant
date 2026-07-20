@@ -8,6 +8,8 @@
   clang,
   gnupg,
   pinentry-emacs,
+  claude-agent-acp,
+  codex-acp,
 }:
 mkShellNoCC {
   packages = [
@@ -23,5 +25,8 @@ mkShellNoCC {
     clang
     gnupg
     pinentry-emacs
+
+    claude-agent-acp
+    codex-acp
   ];
 }
