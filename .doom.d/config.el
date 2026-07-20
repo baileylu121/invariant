@@ -76,4 +76,4 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(after! elfeed-org (setq rmh-elfeed-org-files (list "./elfeed.org")))
+(after! elfeed-org (setq rmh-elfeed-org-files (list "~/org/elfeed.org")))

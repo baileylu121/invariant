@@ -6,6 +6,8 @@
   coreutils,
   fd,
   clang,
+  gnupg,
+  pinentry-emacs,
 }:
 mkShellNoCC {
   packages = [
@@ -19,5 +21,7 @@ mkShellNoCC {
     coreutils
     fd
     clang
+    gnupg
+    pinentry-emacs
   ];
 }
