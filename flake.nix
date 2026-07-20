@@ -58,6 +58,12 @@
           default = callPackage ./nix/devshell.nix { };
         }
       );
+      packages = eachSystem (
+        { callPackage, ... }:
+        {
+          default = callPackage ./nix/package.nix { };
+        }
+      );
       checks = eachSystem (
         { callPackage, system, ... }:
         {
