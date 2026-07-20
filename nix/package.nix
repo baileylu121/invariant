@@ -11,15 +11,14 @@
   claude-agent-acp,
   codex-acp,
 }:
-writeShellApplication {
-  name = "emacs-wrapped";
-  runtimeInputs = [
+emacsWithDoom {
+  doomDir = ../.doom.d;
+  doomLocalDir = "~/.local/share/nix-doom";
+
+  experimentalFetchTree = true;
+
+  extraBinPackages = [
     git
-    (emacsWithDoom {
-      doomDir = ../.doom.d;
-      doomLocalDir = "~/.local/share/nix-doom";
-      experimentalFetchTree = true;
-    })
     ripgrep
     coreutils
     fd
@@ -30,8 +29,4 @@ writeShellApplication {
     claude-agent-acp
     codex-acp
   ];
-
-  text = ''
-    emacs "$@"
-  '';
 }

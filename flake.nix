@@ -52,12 +52,6 @@
         );
     in
     {
-      devShells = eachSystem (
-        { callPackage, ... }:
-        {
-          default = callPackage ./nix/devshell.nix { };
-        }
-      );
       packages = eachSystem (
         { callPackage, ... }:
         {
@@ -67,7 +61,7 @@
       checks = eachSystem (
         { callPackage, system, ... }:
         {
-          treefmt = callPackage ./nix/devshell.nix { };
+          treefmt = callPackage ./nix/formatter.nix { };
           devShell = self.devShells.${system}.default;
         }
       );
