@@ -80,3 +80,9 @@
 
 (require 'acp)
 (require 'agent-shell)
+
+;; These shouldn't be found lazily since direnv likes to interrupt
+(setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
+(setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
+
+(setq agent-shell-session-restore-verbosity 'full)
