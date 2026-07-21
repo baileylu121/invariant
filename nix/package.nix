@@ -9,8 +9,25 @@
   gnupg,
   pinentry-emacs,
   claude-agent-acp,
-  codex-acp,
+  fetchFromGitHub,
+  lib,
+  buildNpmPackage,
 }:
+let
+  codex-acp-agentclientprotocol = buildNpmPackage(finalAttrs: {
+    name = "codex-acp";
+    version = "1.1.5";
+
+    src = fetchFromGitHub {
+        owner = "agentclientprotocol";
+        repo = "codex-acp";
+        tag = "v${finalAttrs.version}";
+        hash = "sha256-5vB/TxxS25F5OPh39Z+6Ofr8Xqdu4gQpwEhMWE1+DiQ=";
+    };
+
+    npmDepsHash = "sha256-AJ76gUBYuxMrSpnTI0ix9SOBRv4Q/pcTUNdPYnIWRIM=";
+  });
+in
 emacsWithDoom {
   doomDir = ../.doom.d;
   doomLocalDir = "~/.local/share/nix-doom";
@@ -27,6 +44,6 @@ emacsWithDoom {
     pinentry-emacs
 
     claude-agent-acp
-    codex-acp
+    codex-acp-agentclientprotocol
   ];
 }
