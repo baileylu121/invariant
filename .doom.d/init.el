@@ -66,7 +66,7 @@
        snippets          ; my elves. They type so I don't have to
        (whitespace +guess +trim)  ; a butler for your whitespace
        ;;word-wrap         ; soft wrapping with language-aware indent
-       (format +on-save)
+       (format +onsave)
 
        :emacs
        dired             ; making dired pretty [functional]
