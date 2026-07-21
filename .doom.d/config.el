@@ -7,6 +7,12 @@
 ;; Relative line numbers
 (setq display-line-numbers-type 'visual)
 
+;; Additional keybinds for built ins
+(map! :leader
+      (:prefix ("l" . "locate")
+       :desc "Consult ripgrep" "r" #'consult-ripgrep
+       :desc "Consult fd" "f" #'consult-fd
+       ))
 
 ;; Org mode config
 (setq org-directory "~/org/")
