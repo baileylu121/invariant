@@ -4,12 +4,12 @@
       "flake": false,
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-hRAsynDdRC2mBpu9MTNn/Z02i2ZihppxRULHi8rOnAo=",
-        "path": "/nix/store/jqzql2a98c1ga99gkjwn1ld1ad6f5g83-source/.doom.d",
+        "narHash": "sha256-oHmKcnrKhMPgmwT7t9HwN1ZiyX3hDpZ+/at64/3ELKI=",
+        "path": "/nix/store/hssa9a4wn6dnfl2bracv4wmhqhw4ch5q-source/.doom.d",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/jqzql2a98c1ga99gkjwn1ld1ad6f5g83-source/.doom.d",
+        "path": "/nix/store/hssa9a4wn6dnfl2bracv4wmhqhw4ch5q-source/.doom.d",
         "type": "path"
       }
     },

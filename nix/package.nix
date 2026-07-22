@@ -1,5 +1,4 @@
 {
-  writeShellApplication,
   git,
   emacsWithDoom,
   ripgrep,
@@ -10,23 +9,25 @@
   pinentry-emacs,
   claude-agent-acp,
   fetchFromGitHub,
-  lib,
   buildNpmPackage,
+  callPackage,
 }:
 let
-  codex-acp-agentclientprotocol = buildNpmPackage(finalAttrs: {
+  codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
     name = "codex-acp";
     version = "1.1.5";
 
     src = fetchFromGitHub {
-        owner = "agentclientprotocol";
-        repo = "codex-acp";
-        tag = "v${finalAttrs.version}";
-        hash = "sha256-5vB/TxxS25F5OPh39Z+6Ofr8Xqdu4gQpwEhMWE1+DiQ=";
+      owner = "agentclientprotocol";
+      repo = "codex-acp";
+      tag = "v${finalAttrs.version}";
+      hash = "sha256-5vB/TxxS25F5OPh39Z+6Ofr8Xqdu4gQpwEhMWE1+DiQ=";
     };
 
     npmDepsHash = "sha256-AJ76gUBYuxMrSpnTI0ix9SOBRv4Q/pcTUNdPYnIWRIM=";
   });
+
+  piAcpCustomized = callPackage ./pi-acp.nix { };
 in
 emacsWithDoom {
   doomDir = ../.doom.d;
@@ -45,5 +46,6 @@ emacsWithDoom {
 
     claude-agent-acp
     codex-acp-agentclientprotocol
+    piAcpCustomized
   ];
 }

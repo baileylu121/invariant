@@ -26,5 +26,6 @@
 
 (setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
 (setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
+(setq agent-shell-pi-acp-command (list (executable-find "pi-acp")))
 
 (setq agent-shell-session-restore-verbosity 'full)
