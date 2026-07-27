@@ -5,11 +5,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-oHmKcnrKhMPgmwT7t9HwN1ZiyX3hDpZ+/at64/3ELKI=",
-        "path": "/nix/store/hssa9a4wn6dnfl2bracv4wmhqhw4ch5q-source/.doom.d",
+        "path": "/nix/store/ilbjqjir5hlkw2yqcbacn0agys74l7ai-source/.doom.d",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/hssa9a4wn6dnfl2bracv4wmhqhw4ch5q-source/.doom.d",
+        "path": "/nix/store/ilbjqjir5hlkw2yqcbacn0agys74l7ai-source/.doom.d",
         "type": "path"
       }
     },

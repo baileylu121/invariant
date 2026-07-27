@@ -28,13 +28,7 @@ writeShellApplication {
     pi-acp
   ];
 
-  runtimeEnv = {
-    PI_CODING_AGENT_DIR = ../pi;
-  };
-
   text = ''
-    export PI_CODING_AGENT_SESSION_DIR="$HOME/.pi/agent/sessions";
-
     exec pi-acp "$@"
   '';
 }
