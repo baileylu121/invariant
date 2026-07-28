@@ -33,4 +33,5 @@
 (use-package! agent-shell-tramp
   :after agent-shell
   :config
+  (load! "tramp-bwrap.el")
   (agent-shell-tramp-mode 1))

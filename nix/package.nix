@@ -11,6 +11,8 @@
   fetchFromGitHub,
   buildNpmPackage,
   callPackage,
+  passt,
+  bubblewrap,
 }:
 let
   codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
@@ -43,6 +45,9 @@ emacsWithDoom {
     clang
     gnupg
     pinentry-emacs
+
+    passt
+    bubblewrap
 
     claude-agent-acp
     codex-acp-agentclientprotocol
