@@ -21,11 +21,16 @@
 (after! elfeed-org (setq rmh-elfeed-org-files (list "~/org/elfeed.org")))
 
 ;; `agent-shell` config
-(require 'acp)
-(require 'agent-shell)
 
-(setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
-(setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
-(setq agent-shell-pi-acp-command (list (executable-find "pi-acp")))
+(use-package! agent-shell
+  :defer t
+  :init
+  (setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
+  (setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
+  (setq agent-shell-pi-acp-command (list (executable-find "pi-acp")))
+  (setq agent-shell-session-restore-verbosity 'full))
 
-(setq agent-shell-session-restore-verbosity 'full)
+(use-package! agent-shell-tramp
+  :after agent-shell
+  :config
+  (agent-shell-tramp-mode 1))
