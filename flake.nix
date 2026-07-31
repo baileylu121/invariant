@@ -10,7 +10,7 @@
     };
 
     nix-doom-emacs-unstraightened = {
-      url = "github:marienz/nix-doom-emacs-unstraightened/lix-compat";
+      url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs = {
         doomdir.follows = "doomdir";
         nixpkgs.follows = "nixpkgs";
