@@ -16,12 +16,18 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    pi-acp = {
+      url = "git+ssh://git@github.com/baileylu121/pi-acp";
+      flake = false;
+    };
   };
 
   outputs =
     {
       nixpkgs,
       nix-doom-emacs-unstraightened,
+      pi-acp,
       self,
       ...
     }:
@@ -55,7 +61,7 @@
       packages = eachSystem (
         { callPackage, ... }:
         {
-          default = callPackage ./nix/package.nix { };
+          default = callPackage ./nix/package.nix { inherit pi-acp; };
         }
       );
       checks = eachSystem (

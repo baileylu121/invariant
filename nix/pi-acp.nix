@@ -1,23 +1,17 @@
 {
   pi-coding-agent,
   writeShellApplication,
-  lib,
   buildNpmPackage,
-  fetchFromGitHub,
+  pi-acp,
 }:
 let
-  pi-acp = buildNpmPackage (finalAttrs: {
+  pi-acp-pkg = buildNpmPackage (_finalAttrs: {
     name = "pi-acp";
     version = "0.0.31";
 
-    src = fetchFromGitHub {
-      owner = "svkozak";
-      repo = "pi-acp";
-      tag = "v${finalAttrs.version}";
-      hash = "sha256-bM3V/3fxkY2Ib+OyfT82StIIRSLXGDuYUbt1CZKpTuo=";
-    };
+    src = pi-acp;
 
-    npmDepsHash = "sha256-qN+b/tMbnJLkWjotl3XrA0nfZ3KT/mT6gM+n3Qiz8Wk=";
+    npmDepsHash = "sha256-/fX79XucKojL/6gZbK5eizEfrXso8rlTgiHfJffmDuY=";
   });
 in
 writeShellApplication {
@@ -25,7 +19,7 @@ writeShellApplication {
 
   runtimeInputs = [
     pi-coding-agent
-    pi-acp
+    pi-acp-pkg
   ];
 
   text = ''
