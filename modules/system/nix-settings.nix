@@ -11,11 +11,15 @@ _: {
           experimental-features = [
             "nix-command"
             "flakes"
+            "auto-allocate-uids"
+            "cgroups"
           ];
           log-format = "multiline-with-logs";
           http-connections = 128;
           max-substitution-jobs = 128;
-          sandbox = "relaxed";
+          system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test" "uid-range" ];
+          auto-allocate-uids = true;
+          use-cgroups = true;
         };
       };
 
