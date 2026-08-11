@@ -35,3 +35,8 @@
   :config
   (load! "tramp-bwrap.el")
   (agent-shell-tramp-mode 1))
+
+;; Lazy load password sourcing for forge
+(after! forge
+  (require 'auth-source-pass)
+  (auth-source-pass-enable))
