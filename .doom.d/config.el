@@ -36,7 +36,26 @@
   (load! "tramp-bwrap.el")
   (agent-shell-tramp-mode 1))
 
-;; Lazy load password sourcing for forge
-(after! forge
-  (require 'auth-source-pass)
-  (auth-source-pass-enable))
+;; Password sourcing
+(require 'auth-source-pass)
+(auth-source-pass-enable)
+
+;; Linear emacs
+(defun linear-load-api-key-from-auth-source ()
+  "Load Linear API key from auth-source."
+  (interactive)
+  (require 'auth-source)
+  (let* ((auth-info (auth-source-search :host "api.linear.app" :user "apikey" :max 1))
+         (secret (when auth-info
+                   (funcall (plist-get (car auth-info) :secret)))))
+    (if secret
+        (progn
+          (setq linear-emacs-api-key secret)
+          (message "Successfully loaded Linear API key from auth-source"))
+      (message "Failed to retrieve Linear API key from auth-source"))))
+
+(use-package! linear-emacs
+  :commands (linear-emacs-list-issues
+             linear-emacs-new-issue
+             linear-emacs-enable-org-sync)
+  :config (linear-load-api-key-from-auth-source))
