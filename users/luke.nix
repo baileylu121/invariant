@@ -54,10 +54,11 @@ in
         inputs.home-manager.nixosModules.default
 
         self.modules.nixos.bash
+        self.modules.nixos.gnupg
+        self.modules.nixos.librewolf
         self.modules.nixos.niri
         self.modules.nixos.theme-compline
         self.modules.nixos.zellij
-        self.modules.nixos.librewolf
       ];
 
       environment.systemPackages = [
