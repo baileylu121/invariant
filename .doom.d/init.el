@@ -103,7 +103,7 @@
        ;; llm               ; when I said you needed friends, I didn't mean...
        ;;(lsp +eglot)      ; M-x vscode
        (magit +forge)      ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
+       make                ; run make tasks from Emacs
        (pass +auth)        ; password manager for nerds
        ;;pdf               ; pdf enhancements
        ;;terraform         ; infrastructure as code

@@ -14,6 +14,7 @@
   passt,
   bubblewrap,
   pi-acp,
+  pass-wayland
 }:
 let
   codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
@@ -53,5 +54,7 @@ emacsWithDoom {
     claude-agent-acp
     codex-acp-agentclientprotocol
     piAcpCustomized
+
+    pass-wayland
   ];
 }
