@@ -42,7 +42,7 @@ in
         homeDirectory = "/home/luke";
         packages = [
           pkgs.delta
-          self.packages.${system}.llama-server
+          self.packages.${system}.llama-swap-service
         ];
       };
     };

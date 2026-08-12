@@ -39,6 +39,17 @@
       url = "github:ikawrakow/ik_llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nimi = {
+      url = "github:weyl-ai/nimi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    llama-swap-nix = {
+      url = "github:baileylu121/llama-swap.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nimi.follows = "nimi";
+    };
   };
 
   nixConfig = {
