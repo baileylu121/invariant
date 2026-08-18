@@ -18,7 +18,7 @@
     };
 
     pi-acp = {
-      url = "git+ssh://git@github.com/baileylu121/pi-acp";
+      url = "git+ssh://git@github.com/svkozak/pi-acp";
       flake = false;
     };
   };

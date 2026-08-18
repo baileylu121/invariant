@@ -7,7 +7,7 @@
 let
   pi-acp-pkg = buildNpmPackage (_finalAttrs: {
     name = "pi-acp";
-    version = "0.0.31";
+    version = "0.0.33";
 
     src = pi-acp;
 
