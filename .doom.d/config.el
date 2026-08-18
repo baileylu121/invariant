@@ -28,7 +28,15 @@
   (setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
   (setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
   (setq agent-shell-pi-acp-command (list (executable-find "pi-acp")))
-  (setq agent-shell-session-restore-verbosity 'full))
+  (setq agent-shell-session-restore-verbosity 'full)
+  (map! :leader
+        (:prefix ("e" . "agent shell")
+         :desc "Agent Shell: New Shell" "e" #'agent-shell-new-shell
+         :desc "Agent Shell: New Pi Shell" "p" #'agent-shell-pi-start-agent
+         :desc "Agent Shell: New Codex Shell" "x" #'agent-shell-openai-start-codex
+         :desc "Agent Shell: New Claude Shell" "c" #'agent-shell-anthropic-start-claude-code
+         ))
+  )
 
 (use-package! agent-shell-tramp
   :after agent-shell
