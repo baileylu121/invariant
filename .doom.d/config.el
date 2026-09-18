@@ -68,3 +68,6 @@
              linear-emacs-new-issue
              linear-emacs-enable-org-sync)
   :config (linear-load-api-key-from-auth-source))
+
+;; Envrc async mode
+(after! envrc (setq envrc-async t))
