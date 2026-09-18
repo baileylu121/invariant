@@ -35,7 +35,7 @@
          :desc "Agent Shell: New Pi Shell" "p" #'agent-shell-pi-start-agent
          :desc "Agent Shell: New Codex Shell" "x" #'agent-shell-openai-start-codex
          :desc "Agent Shell: New Claude Shell" "c" #'agent-shell-anthropic-start-claude-code
-         :desc "Agent Shell: Help Menu" "h" #'agent-shell-anthropic-start-claude-code
+         :desc "Agent Shell: Help Menu" "h" #'agent-shell-help-menu
          ))
   )
 
