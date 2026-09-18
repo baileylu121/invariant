@@ -1,20 +1,21 @@
 {
-  git,
-  emacsWithDoom,
-  ripgrep,
-  coreutils,
-  fd,
-  clang,
-  gnupg,
-  pinentry-emacs,
-  claude-agent-acp,
-  fetchFromGitHub,
+  bubblewrap,
   buildNpmPackage,
   callPackage,
+  clang,
+  claude-agent-acp,
+  coreutils,
+  emacsWithDoom,
+  fd,
+  fetchFromGitHub,
+  git,
+  gnupg,
+  ispell,
+  pass-wayland,
   passt,
-  bubblewrap,
   pi-acp,
-  pass-wayland
+  pinentry-all,
+  ripgrep,
 }:
 let
   codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
@@ -46,7 +47,7 @@ emacsWithDoom {
     fd
     clang
     gnupg
-    pinentry-emacs
+    pinentry-all
 
     passt
     bubblewrap
@@ -56,5 +57,7 @@ emacsWithDoom {
     piAcpCustomized
 
     pass-wayland
+
+    ispell
   ];
 }
