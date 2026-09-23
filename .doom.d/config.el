@@ -71,3 +71,9 @@
 
 ;; Envrc async mode
 (after! envrc (setq envrc-async t))
+
+;; Useful eww keybind for opening the link at the point
+(after! eww
+  (map! :leader
+        (:prefix "e"
+         :desc "EWW: Open in buffer" "w" #'eww-open-in-new-buffer)))
