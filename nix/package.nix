@@ -8,14 +8,17 @@
   emacsWithDoom,
   fd,
   fetchFromGitHub,
+  ghostscript,
   git,
   gnupg,
+  graphviz,
   ispell,
   pass-wayland,
   passt,
   pi-acp,
   pinentry-all,
   ripgrep,
+  texliveFull,
 }:
 let
   codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
@@ -59,5 +62,8 @@ emacsWithDoom {
     pass-wayland
 
     ispell
+    ghostscript
+    texliveFull
+    graphviz
   ];
 }
