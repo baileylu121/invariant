@@ -11,8 +11,9 @@
 (map! :leader
       (:prefix ("l" . "locate")
        :desc "Consult ripgrep" "r" #'consult-ripgrep
-       :desc "Consult fd" "f" #'consult-fd
-       ))
+       :desc "Consult fd" "f" #'consult-fd)
+      (:prefix "p"
+       :desc "terminal (ghostel)" "t" #'ghostel-project))
 
 ;; Org mode config
 (setq org-directory "~/org/")
