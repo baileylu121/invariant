@@ -17,6 +17,8 @@
       };
     };
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     pi-acp = {
       url = "git+ssh://git@github.com/baileylu121/pi-acp";
       flake = false;
@@ -28,6 +30,7 @@
       nixpkgs,
       nix-doom-emacs-unstraightened,
       pi-acp,
+      llm-agents,
       self,
       ...
     }:
@@ -61,7 +64,7 @@
       packages = eachSystem (
         { callPackage, ... }:
         {
-          default = callPackage ./nix/package.nix { inherit pi-acp; };
+          default = callPackage ./nix/package.nix { inherit pi-acp llm-agents; };
         }
       );
       checks = eachSystem (

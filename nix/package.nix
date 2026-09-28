@@ -3,7 +3,6 @@
   buildNpmPackage,
   callPackage,
   clang,
-  claude-agent-acp,
   coreutils,
   emacsWithDoom,
   fd,
@@ -19,6 +18,9 @@
   pinentry-all,
   ripgrep,
   texliveFull,
+
+  llm-agents,
+  stdenv,
 }:
 let
   codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
@@ -55,7 +57,7 @@ emacsWithDoom {
     passt
     bubblewrap
 
-    claude-agent-acp
+    llm-agents.packages.${stdenv.hostPlatform.system}.claude-agent-acp
     codex-acp-agentclientprotocol
     piAcpCustomized
 
