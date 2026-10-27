@@ -33,7 +33,6 @@ let
       glab
       graphite-cli
 
-      inputs.llm-agents.packages.${system}.omp
       pi-coding-agent
 
       btop
