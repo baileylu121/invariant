@@ -19,7 +19,6 @@ in
       ];
     in
     {
-
       options.niriConfig = mkOption {
         type = types.pathInStore;
         description = ''
@@ -46,10 +45,14 @@ in
       ];
 
       config = {
-        environment.systemPackages = [
-          pkgs.wl-clipboard-rs
-          pkgs.xdg-desktop-portal-gnome
+        environment.systemPackages = with pkgs; [
+          wl-clipboard-rs
+          xdg-desktop-portal-gnome
+          xwayland-satellite
         ];
+
+        programs.xwayland.enable = true;
+
 
         home-manager.sharedModules = [
           {
