@@ -48,6 +48,18 @@ in
           boot.kernelModules = [ "kvm-amd" ];
           boot.extraModulePackages = [ ];
 
+          boot.kernelParams = [
+            "amdgpu.dcdebugmask=0x10"
+            "efi_pstore.pstore_disable=0"
+          ];
+
+          boot.kernel.sysctl = {
+            "kernel.sysrq" = 1;
+            "kernel.hardlockup_panic" = 1;
+            "kernel.softlockup_panic" = 1;
+            "kernel.panic" = 30;
+          };
+
           swapDevices = [ ];
 
           nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
