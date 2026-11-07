@@ -40,6 +40,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    strata-src = {
+      url = "github:Niko1221/Strata/v0.2.12";
+      flake = false;
+    };
+
+    strata-nix = {
+      url = "github:Yunor743/strata.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.strata.follows = "strata-src";
+    };
+
     nimi = {
       url = "github:weyl-ai/nimi";
       inputs.nixpkgs.follows = "nixpkgs";
