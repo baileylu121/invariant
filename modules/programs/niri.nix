@@ -53,7 +53,6 @@ in
 
         programs.xwayland.enable = true;
 
-
         home-manager.sharedModules = [
           {
             home.packages = [
