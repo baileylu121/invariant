@@ -85,7 +85,7 @@ in
 {
   _class = "llama-swap";
 
-  models."Qwen 3.8 Flash Next IQ3_XXS" = {
+  models."Qwen 3.8 Flash Next" = {
     cmd = llama-swap-lib.formatLlamaCmd {
       package = strata.strata-serve;
       exe = "strata-serve";
