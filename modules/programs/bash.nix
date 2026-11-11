@@ -34,6 +34,8 @@ let
 
       pi-coding-agent
       claude-code
+      omp
+      codex
       herdr-desktop
       herdr-core
 
