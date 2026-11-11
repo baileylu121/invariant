@@ -21,7 +21,7 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       ;;company           ; the ultimate code completion backend
+       company                ; the ultimate code completion backend
        (corfu +orderless)     ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
@@ -61,12 +61,12 @@
        lispy                       ; vim for lisp, for people who don't like vim
        multiple-cursors            ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       ;;parinfer          ; turn lisp into python, sort of
+       parinfer                         ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets                         ; my elves. They type so I don't have to
        (whitespace +guess +trim)        ; a butler for your whitespace
        ;;word-wrap         ; soft wrapping with language-aware indent
-       (format +onsave)
+       (format +onsave +lsp)
 
        :emacs
        dired             ; making dired pretty [functional]
@@ -85,9 +85,9 @@
        ghostel                          ; the best terminal emulation in Emacs
 
        :checkers
-       syntax        ; tasing you for every semicolon you forget
-       ;;(spell +flyspell) ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       syntax                        ; tasing you for every semicolon you forget
+       (spell +flyspell)             ; tasing you for misspelling mispelling
+       grammar                       ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -96,16 +96,16 @@
        ;;debugger          ; stepping through code, to help you add bugs
        direnv
        docker
-       ;;editorconfig      ; let someone else argue about tabs vs spaces
+       editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)                ; run code, run (also, repls)
        lookup                         ; navigate your code and its documentation
        ;; llm               ; when I said you needed friends, I didn't mean...
-       ;;(lsp +eglot)      ; M-x vscode
+       lsp                ; M-x vscode
        (magit +forge)     ; a git porcelain for Emacs
        make               ; run make tasks from Emacs
        (pass +auth)       ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       pdf                ; pdf enhancements
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        ;;tree-sitter       ; syntax and parsing, sitting in a tree...
@@ -119,7 +119,7 @@
        ;;ada               ; In strong typing we (blindly) trust
        ;;(agda +local)     ; types of types of types of types...
        ;;beancount         ; mind the GAAP
-       (cc +lsp)                        ; C > C++ == 1
+       (cc +lsp +ccls)                  ; C > C++ == 1
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -147,7 +147,7 @@
        json                ; At least it ain't XML
        ;;janet             ; Fun fact: Janet is me!
        (java +lsp)         ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)  ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp)   ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        latex               ; writing papers in Emacs has never been so fun
@@ -159,12 +159,13 @@
        nix                              ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        odin
-       (org +roam)        ; organize your plain life in plain text
+       (org +roam)      ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
        ;;purescript        ; javascript, but functional
-       python           ; beautiful is better than ugly
+       python                           ; beautiful is better than ugly
+
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6

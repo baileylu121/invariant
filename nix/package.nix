@@ -16,6 +16,7 @@
   passt,
   pi-acp,
   pinentry-all,
+  poppler-utils,
   ripgrep,
   texliveFull,
 
@@ -58,6 +59,7 @@ emacsWithDoom {
     bubblewrap
 
     llm-agents.packages.${stdenv.hostPlatform.system}.claude-agent-acp
+    llm-agents.packages.${stdenv.hostPlatform.system}.omp
     codex-acp-agentclientprotocol
     piAcpCustomized
 
@@ -67,5 +69,6 @@ emacsWithDoom {
     ghostscript
     texliveFull
     graphviz
+    poppler-utils
   ];
 }
