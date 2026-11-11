@@ -27,8 +27,6 @@
       ];
     };
 
-    boot.initrd.systemd.enable = true;
-
     boot.initrd.systemd.services.impermanence-setup = {
       unitConfig.DefaultDependencies = false;
       wantedBy = [ "initrd.target" ];
