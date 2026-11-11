@@ -15,6 +15,28 @@
       (:prefix "p"
        :desc "terminal (ghostel)" "t" #'ghostel-project))
 
+;; Herdr: C-w h/j/k/l past the frame edge moves to the neighbouring Herdr pane
+(defun +herdr-window-move (dir)
+  "Select the window in DIR, or the Herdr pane in DIR at the frame's edge."
+  (require 'windmove)
+  (if (or (let ((w (windmove-find-other-window dir)))
+            (and w (not (window-minibuffer-p w))))
+          (display-graphic-p)
+          (not (getenv "HC_TERMINAL_ID"))
+          (not (executable-find "herdr-app")))
+      (windmove-do-window-select dir)
+    (call-process "herdr-app" nil 0 nil "do" (format "pane.go:%s" dir))))
+
+(defun +herdr/window-left () (interactive) (+herdr-window-move 'left))
+(defun +herdr/window-right () (interactive) (+herdr-window-move 'right))
+(defun +herdr/window-up () (interactive) (+herdr-window-move 'up))
+(defun +herdr/window-down () (interactive) (+herdr-window-move 'down))
+
+(map! [remap evil-window-left] #'+herdr/window-left
+      [remap evil-window-right] #'+herdr/window-right
+      [remap evil-window-up] #'+herdr/window-up
+      [remap evil-window-down] #'+herdr/window-down)
+
 ;; Org mode config
 (setq org-directory "~/org/")
 

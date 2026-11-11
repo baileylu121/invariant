@@ -33,6 +33,9 @@ let
       graphite-cli
 
       pi-coding-agent
+      claude-code
+      herdr-desktop
+      herdr-core
 
       btop
 
