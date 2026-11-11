@@ -119,6 +119,78 @@
         "type": "github"
       }
     },
+    "doomdir": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783603851,
+        "narHash": "sha256-PXn0v4NR75U7/FpkaZ9GD6HPepVY5vVT48tMd1tMgdQ=",
+        "owner": "marienz",
+        "repo": "nix-doom-emacs-unstraightened",
+        "rev": "4c63e8a411f815bd2473e5ced94dc4b8bf31d240",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marienz",
+        "ref": "doomdir",
+        "repo": "nix-doom-emacs-unstraightened",
+        "type": "github"
+      }
+    },
+    "doomemacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793928737,
+        "narHash": "sha256-nUIqtbuv8Qrw4LH8CzVty/2D0wRqX9bMdDwqNvDa0Do=",
+        "owner": "doomemacs",
+        "repo": "core",
+        "rev": "7ccac7f643ad67baa25b216717cf8617a0903c69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doomemacs",
+        "repo": "core",
+        "type": "github"
+      }
+    },
+    "doomemacs-modules": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793763084,
+        "narHash": "sha256-aEkGwMUoLxRlSMLU1StIqVMAdhu97+rT/ByEz1uuNEg=",
+        "owner": "doomemacs",
+        "repo": "modules",
+        "rev": "f054be8fcdd2a0446eb8259d76dd4f6f76acc0b7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doomemacs",
+        "repo": "modules",
+        "type": "github"
+      }
+    },
+    "emacs-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nix-doom-emacs-unstraightened"
+        ],
+        "nixpkgs-stable": [
+          "nix-doom-emacs-unstraightened"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794412481,
+        "narHash": "sha256-Pv/EOm33j0bgqpJGgrbRM91YanRk1aC23qNXrThEydA=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "d6b7a178036a028d08062c15f27fcec0094d1f5e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -554,6 +626,30 @@
         "type": "github"
       }
     },
+    "nix-doom-emacs-unstraightened": {
+      "inputs": {
+        "doomdir": "doomdir",
+        "doomemacs": "doomemacs",
+        "doomemacs-modules": "doomemacs-modules",
+        "emacs-overlay": "emacs-overlay",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794413872,
+        "narHash": "sha256-s5JCbZdrapWwruamlzZiN5ffu/IX6khODR27OgGj374=",
+        "owner": "marienz",
+        "repo": "nix-doom-emacs-unstraightened",
+        "rev": "1d5c120b94dc776d9e94227a2c7d68220b5c26de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marienz",
+        "repo": "nix-doom-emacs-unstraightened",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": "nixpkgs_6"
@@ -814,6 +910,22 @@
         "type": "github"
       }
     },
+    "pi-acp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785952319,
+        "narHash": "sha256-9cvase7skQmxGI1imRucOowUYZlKsDfCm/RC8Ydp3h0=",
+        "ref": "refs/heads/main",
+        "rev": "464ba61e68d4a9e5a79bb640be034dee3aa319e5",
+        "revCount": 145,
+        "type": "git",
+        "url": "ssh://git@github.com/baileylu121/pi-acp"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/baileylu121/pi-acp"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -827,8 +939,10 @@
         "llm-agents": "llm-agents",
         "nimi": "nimi",
         "nix-cachy-os-kernel": "nix-cachy-os-kernel",
+        "nix-doom-emacs-unstraightened": "nix-doom-emacs-unstraightened",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_7",
+        "pi-acp": "pi-acp",
         "strata-nix": "strata-nix",
         "strata-src": "strata-src",
         "stylix": "stylix",

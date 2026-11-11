@@ -38,10 +38,10 @@ let
     npmDepsHash = "sha256-AJ76gUBYuxMrSpnTI0ix9SOBRv4Q/pcTUNdPYnIWRIM=";
   });
 
-  piAcpCustomized = callPackage ./pi-acp.nix { inherit pi-acp; };
+  piAcpCustomized = callPackage ./_pi-acp.nix { inherit pi-acp; };
 in
 emacsWithDoom {
-  doomDir = ../.doom.d;
+  doomDir = ./_doom.d;
   doomLocalDir = "~/.local/share/nix-doom";
 
   experimentalFetchTree = true;

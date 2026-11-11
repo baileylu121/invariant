@@ -61,6 +61,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nimi.follows = "nimi";
     };
+
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    pi-acp = {
+      url = "git+ssh://git@github.com/baileylu121/pi-acp";
+      flake = false;
+    };
   };
 
   nixConfig = {
