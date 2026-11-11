@@ -10,9 +10,6 @@ eval "$(starship init bash)"
 alias cd="z"
 alias cdi="zi"
 
-alias vi="nvim"
-alias vim="nvim"
-
 alias cat="bat -p"
 
 alias ls="eza --icons --all --oneline --sort=type"

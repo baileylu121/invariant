@@ -41,15 +41,19 @@ let
 
       starship
     ];
+
+  mkBashrc =
+    pkgs:
+    pkgs.replaceVars ./bash/.bashrc {
+      bleshPath = "${pkgs.blesh}/share/blesh/ble.sh";
+    };
 in
 {
   config = {
     perSystem =
       { pkgs, ... }:
       let
-        bashrc = pkgs.replaceVars ./bash/.bashrc {
-          bleshPath = "${pkgs.blesh}/share/blesh/ble.sh";
-        };
+        bashrc = mkBashrc pkgs;
       in
       rec {
         packages.bash = pkgs.writeShellApplication {
@@ -78,6 +82,7 @@ in
       in
       {
         home.sessionVariables.SHELL = lib.getExe bash;
+        home.file.".bashrc".source = mkBashrc pkgs;
         home.packages = [ bash ] ++ runtimeInputs pkgs;
       };
 
