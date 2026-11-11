@@ -40,7 +40,7 @@ in
 
       imports = [
         self.modules.nixos.foot
-        self.modules.nixos.neovim
+        self.modules.nixos.emacs
         self.modules.nixos.dank-material-shell
       ];
 
