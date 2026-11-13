@@ -47,6 +47,9 @@
 
 (use-package! agent-shell
   :defer t
+  :hook (agent-shell-mode . (lambda ()
+                              (setq-local display-line-numbers-type 'relative)
+                              (display-line-numbers-mode 1)))
   :init
   (setq agent-shell-anthropic-claude-acp-command (list (executable-find "claude-agent-acp")))
   (setq agent-shell-openai-codex-acp-command (list (executable-find "codex-acp")))
