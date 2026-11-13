@@ -94,7 +94,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+H { spawn "herdr-app"; }
+    Mod+M { spawn "herdr-app"; }
     Mod+T { spawn "footclient" "zellij"; }
     Mod+Alt+T { spawn "footclient"; }
     Mod+B { spawn "librewolf"; }
