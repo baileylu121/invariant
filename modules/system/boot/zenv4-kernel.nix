@@ -3,16 +3,13 @@
   flake.modules.nixos.zenv4-kernel =
     { pkgs, ... }:
     let
-      zen4Pkgs = pkgs.appendOverlays [
-        inputs.nix-cachy-os-kernel.overlays.default
-        self.overlays.zen4
-      ];
+      cachyPkgs = pkgs.appendOverlays [ inputs.nix-cachy-os-kernel.overlays.pinned ];
     in
     {
       imports = [
         self.modules.nixos.boot
       ];
 
-      boot.kernelPackages = zen4Pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
+      boot.kernelPackages = cachyPkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
     };
 }
