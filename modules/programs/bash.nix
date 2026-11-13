@@ -1,4 +1,5 @@
 {
+  inputs,
   self,
   lib,
   ...
@@ -20,6 +21,8 @@ let
       bat
       eza
       ripgrep
+      fzf
+      fff
       ast-grep
       fd
       jq
@@ -34,9 +37,11 @@ let
 
       pi-coding-agent
       claude-code
-      omp
-      codex
-      herdr-desktop
+      inputs.llm-agents.packages.${system}.omp
+      inputs.llm-agents.packages.${system}.codex
+      (herdr-desktop.overrideAttrs (old: {
+        buildInputs = old.buildInputs ++ [ zstd ];
+      }))
       herdr-core
 
       btop
