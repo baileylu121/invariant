@@ -8,9 +8,15 @@ _: {
         package = pkgs.lixPackageSets.latest.lix;
         settings = {
           trusted-users = [ "@wheel" ];
-          extra-substituters = [ "https://cache.nixos-cuda.org" ];
+          extra-substituters = [
+            "https://cache.nixos-cuda.org"
+            "https://cache.numtide.com"
+            "https://cache.lantian.pub/lantian"
+          ];
           extra-trusted-public-keys = [
             "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+            "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+            "lantian:WVGO7vsRMSEN+h7Lp7kv6SAmrkEXgUGbbXm7jMDjBuQ="
           ];
           experimental-features = [
             "nix-command"
