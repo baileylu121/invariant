@@ -1,12 +1,10 @@
 {
   bubblewrap,
-  buildNpmPackage,
   callPackage,
   clang,
   coreutils,
   emacsWithDoom,
   fd,
-  fetchFromGitHub,
   ghostscript,
   git,
   gnupg,
@@ -24,20 +22,6 @@
   stdenv,
 }:
 let
-  codex-acp-agentclientprotocol = buildNpmPackage (finalAttrs: {
-    name = "codex-acp";
-    version = "1.1.5";
-
-    src = fetchFromGitHub {
-      owner = "agentclientprotocol";
-      repo = "codex-acp";
-      tag = "v${finalAttrs.version}";
-      hash = "sha256-5vB/TxxS25F5OPh39Z+6Ofr8Xqdu4gQpwEhMWE1+DiQ=";
-    };
-
-    npmDepsHash = "sha256-AJ76gUBYuxMrSpnTI0ix9SOBRv4Q/pcTUNdPYnIWRIM=";
-  });
-
   piAcpCustomized = callPackage ./_pi-acp.nix { inherit pi-acp; };
 in
 emacsWithDoom {
@@ -60,7 +44,7 @@ emacsWithDoom {
 
     llm-agents.packages.${stdenv.hostPlatform.system}.claude-agent-acp
     llm-agents.packages.${stdenv.hostPlatform.system}.omp
-    codex-acp-agentclientprotocol
+    llm-agents.packages.${stdenv.hostPlatform.system}.codex-acp
     piAcpCustomized
 
     pass-wayland
