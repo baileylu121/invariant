@@ -14,7 +14,7 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+    nix-cachy-os-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     home-manager.url = "github:nix-community/home-manager";
 
@@ -74,8 +74,6 @@
   };
 
   nixConfig = {
-    extra-subsituters = [ "https://cache.garnix.io" ];
-    extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
     extra-experimental-features = [
       "pipe-operator"
       "pipe-operators"
