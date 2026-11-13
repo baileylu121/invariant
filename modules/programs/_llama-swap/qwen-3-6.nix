@@ -1,10 +1,12 @@
 {
   inputs,
   system,
+  pkgs,
   llama-swap-lib,
   ...
 }:
 let
+  inherit (pkgs) lib;
   qwen-3-6-35b-a3b = llama-swap-lib.fetchHuggingFace {
     url = "https://huggingface.com/byteshape/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-Q4_K_S-4.22bpw.gguf";
     hash = "sha256-nu54tkiirNCBDYImVNwe2YeN2M0lfn2yu7BZ3hl7EJg=";
@@ -17,7 +19,8 @@ in
   models."Qwen 3.6 35B A3B" = {
     cmd = llama-swap-lib.formatLlamaCmd {
       package = inputs.ik-llama-cpp.packages.${system}.cuda.overrideDerivation (oldAttrs: {
-        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+        cmakeFlags = builtins.filter (f: !(lib.hasPrefix "-DCMAKE_CUDA_ARCHITECTURES" f)) (oldAttrs.cmakeFlags or [ ]) ++ [
+          "-DCMAKE_CUDA_ARCHITECTURES=120"
           "-DCMAKE_C_FLAGS=-march=znver5"
           "-DCMAKE_CXX_FLAGS=-march=znver5"
         ];
