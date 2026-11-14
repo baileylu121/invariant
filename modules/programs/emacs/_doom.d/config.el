@@ -71,6 +71,34 @@
   (load! "tramp-bwrap.el")
   (agent-shell-tramp-mode 1))
 
+;; Agent shell save and load integration
+(after! persp-mode
+  (defun +agent-shell-restore-save (buffer tag _vars)
+    (with-current-buffer buffer
+      (when-let* ((agent (map-elt (agent-shell-get-config buffer)
+                                  :identifier)))
+        (list tag
+              (buffer-name buffer)
+              default-directory
+              agent
+              (map-nested-elt (agent-shell--state) '(:session :id))))))
+
+  (defun +agent-shell-restore-load (savelist _default _after)
+    (pcase-let* ((`(,_ ,name ,dir ,agent ,session) savelist)
+                 (config (agent-shell--resolve-config-designator agent))
+                 (buffer (agent-shell--start :config config
+                                             :cwd dir
+                                             :session-id session
+                                             :no-focus t)))
+      (with-current-buffer buffer (rename-buffer name t))
+      buffer))
+
+  (persp-def-buffer-save/load
+   :mode 'agent-shell-mode
+   :tag-symbol 'def-agent-shell-buffer
+   :save-function '+agent-shell-restore-save
+   :load-function '+agent-shell-restore-load))
+
 ;; Password sourcing
 (require 'auth-source-pass)
 (auth-source-pass-enable)
