@@ -1,7 +1,6 @@
 {
   inputs,
   self,
-  lib,
   ...
 }:
 {
@@ -24,8 +23,16 @@
       inherit (self.packages.${system}) emacs;
     in
     {
-      home.sessionVariables.EDITOR = lib.getExe emacs;
       home.packages = [ emacs ];
+
+      services.emacs = {
+        enable = true;
+        package = emacs;
+        startWithUserSession = "graphical";
+        defaultEditor = true;
+        client.enable = true;
+        client.arguments = [ "-c" ];
+      };
     };
 
   flake.modules.nixos.emacs =
@@ -35,7 +42,7 @@
       inherit (self.packages.${system}) emacs;
     in
     {
-      environment.variables.EDITOR = lib.getExe emacs;
+      environment.variables.EDITOR = "emacsclient -nw";
       environment.systemPackages = [ emacs ];
     };
 }
