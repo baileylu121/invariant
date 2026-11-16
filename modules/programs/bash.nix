@@ -46,7 +46,7 @@ let
 
       btop
 
-      self.packages.${system}.direnv
+      pkgs.direnv
       nh
 
       starship

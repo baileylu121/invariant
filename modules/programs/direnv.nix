@@ -1,47 +1,24 @@
 {
-  self,
+  inputs,
   ...
 }:
 {
   config = {
-    perSystem =
-      { pkgs, ... }:
-      {
-        packages.direnv = pkgs.writeShellApplication {
-          name = "direnv";
+    flake.modules.nixos.direnv = {
+      imports = [
+        inputs.iets.nixosModules.default
+      ];
 
-          runtimeInputs = [
-            pkgs.direnv
-          ];
-
-          runtimeEnv = {
-            DIRENV_CONFIG = "${pkgs.nix-direnv}/share/nix-direnv/direnvrc";
-          };
-
-          text = ''
-            exec direnv "$@"
-          '';
-        };
+      programs.direnv = {
+        enable = true;
+        enableBashIntegration = false;
       };
 
-    flake.modules.homeManager.direnv =
-      { pkgs, ... }:
-      let
-        inherit (pkgs.stdenv.hostPlatform) system;
-        inherit (self.packages.${system}) direnv;
-      in
-      {
-        home.packages = [ direnv ];
-      };
+      iets.direnv.enable = true;
+    };
 
-    flake.modules.nixos.direnv =
-      { pkgs, ... }:
-      let
-        inherit (pkgs.stdenv.hostPlatform) system;
-        inherit (self.packages.${system}) direnv;
-      in
-      {
-        environment.systemPackages = [ direnv ];
-      };
+    flake.modules.homeManager.direnv = {
+      programs.direnv.enable = true;
+    };
   };
 }

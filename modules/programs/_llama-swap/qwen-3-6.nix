@@ -19,11 +19,13 @@ in
   models."Qwen 3.6 35B A3B" = {
     cmd = llama-swap-lib.formatLlamaCmd {
       package = inputs.ik-llama-cpp.packages.${system}.cuda.overrideDerivation (oldAttrs: {
-        cmakeFlags = builtins.filter (f: !(lib.hasPrefix "-DCMAKE_CUDA_ARCHITECTURES" f)) (oldAttrs.cmakeFlags or [ ]) ++ [
-          "-DCMAKE_CUDA_ARCHITECTURES=120"
-          "-DCMAKE_C_FLAGS=-march=znver5"
-          "-DCMAKE_CXX_FLAGS=-march=znver5"
-        ];
+        cmakeFlags =
+          builtins.filter (f: !(lib.hasPrefix "-DCMAKE_CUDA_ARCHITECTURES" f)) (oldAttrs.cmakeFlags or [ ])
+          ++ [
+            "-DCMAKE_CUDA_ARCHITECTURES=120"
+            "-DCMAKE_C_FLAGS=-march=znver5"
+            "-DCMAKE_CXX_FLAGS=-march=znver5"
+          ];
       });
 
       args = {

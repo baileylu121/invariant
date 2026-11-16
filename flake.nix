@@ -40,6 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    iets = {
+      url = "github:numtide/iets";
+    };
+
     strata-src = {
       url = "github:Niko1221/Strata/v0.2.12";
       flake = false;
